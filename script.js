@@ -55,9 +55,13 @@ var colorScale = d3.scaleLinear()
           // Get the top 10 organizations
           const topOrganizations = filteredData.slice(0, 10);
           if(topOrganizations.length==0){
-            popupContentContainer.innerHTML = "<h1>No Data Available</h1>";
+            console.log("Bhai Bhai");
+            // popupContentContainer.innerHTML = "<h1>No Data Available</h1>";
+            const barchartdiv = document.querySelector("#barChart");
+            console.log(barchartdiv)
+            barchartdiv.innerHTML="<h1>No Data Available</h1>";
             return `
-            <div><h3>No Data Available</h3></div>`;
+            <h1>No Data Available</h1>`;
           }
           // Plot bar chart based on the selected data type
           const margin = { top: 20, right: 20, bottom: 30, left: 40 };
@@ -81,9 +85,15 @@ var colorScale = d3.scaleLinear()
               var tooltip1 = d3.select(".popup-container")
               .append("div")
               .attr("class", "tooltip1")
-              .style("opacity", 0);
+              .style("opacity", 0)
+              .html("Bhai");
 
-
+              const svg2 = d3.select("#page-top");
+              const svgRect = svg2.node().getBoundingClientRect();
+              const top_margin=svgRect.top;
+              const svg3 = d3.select("#my_dataviz");
+              const svgRect2 = svg3.node().getBoundingClientRect();
+              const top_margin2=svgRect2.top;
           svg.selectAll(".bar")
               .data(topOrganizations)
               .enter().append("rect")
@@ -101,25 +111,27 @@ var colorScale = d3.scaleLinear()
                 // var value = data.get(d.properties.name.toUpperCase()) || 0;
                 var Info = `Organisation Name:${d.Organisation}<br/>${dataType}:${d[dataType]}`;
                 console.log(Info);
+
                 // Update tooltip content and position
-                tooltip1.transition().duration(200).style("opacity", 1);
+                tooltip1.style("opacity", 1);
                 tooltip1
                     .html(Info)
-                    .style("left",  parseInt(event.pageX)+20 + "px") 
-                    .style("top", parseInt(event.pageY)+20 + "px");
+                    .style("left",  parseInt(event.pageX)-svgRect2.left+20 + "px") 
+                    .style("top", parseInt(event.pageY)+top_margin-top_margin2 + "px");
+                console.log("Kanda");
             })
             .on("mousemove", function (event, d) {
               tooltip1
-                  .style("left",  20+parseInt(event.pageX) + "px") 
-                  .style("top", 20+parseInt(event.pageY) + "px");
+                  .style("left",  parseInt(event.pageX)-svgRect2.left+20 + "px") 
+                  .style("top", parseInt(event.pageY)+top_margin-top_margin2 + "px");
           })
             .on("mouseout", function (event, d) {
                 d3.select(this)
-                    .style("opacity", .8)
+                    // .style("opacity", .8)
                     .style("stroke", "transparent");
                 
                 // Hide the tooltip
-                tooltip1.transition().duration(500).style("opacity", 0);
+                tooltip1.style("opacity", 0);
             });
           
           svg.append("g")
@@ -132,16 +144,17 @@ var colorScale = d3.scaleLinear()
               .attr("dy", ".35em")
               .style("text-anchor", "end")
               .style("font-size", "18px")
-              .style("font-wight", "bold")
+            //   .style("font-wight", "bold")
               ;
       
           svg.append("g")
               .call(d3.axisLeft(y))
               .style("font-size", "18px")
               .style("font-wight", "bold")
+            //   .style("font-wight", "bold")
               ;
       });
-  
+    
       // Add event listener to the close button after it's appended to the DOM
       popupContentContainer.querySelector(".close-btn").addEventListener("click", function() {
           document.body.removeChild(popupContentContainer); // Remove the popup content container
@@ -162,15 +175,18 @@ var colorScale = d3.scaleLinear()
     const popupContent = generatePopupContent(countryName, temp_value);
     popup.innerHTML = popupContent;
 
-    const svg = d3.select("#my_dataviz");
+    const svg = d3.select("#page-top");
     const svgRect = svg.node().getBoundingClientRect();
     const top_margin=svgRect.top;
-    // console.log(top_margin)
+    const svg3 = d3.select("#my_dataviz");
+    const svgRect2 = svg3.node().getBoundingClientRect();
+    const top_margin2=svgRect2.top;
+    console.log(top_margin)
     // console.log(svgRect.left, svgRect.top, svgRect.width, svgRect.height)
-    popup.style.left = `${svgRect.left}px`;
-    // popup.style.top = `${top_margin}px`;
-    popup.style.width = `${svgRect.width}px`;
-    popup.style.height = `${svgRect.height}px`;
+    popup.style.left = `${svgRect2.left}px`;
+    popup.style.top = `${-top_margin+top_margin2}px`;
+    popup.style.width = `${svgRect2.width}px`;
+    popup.style.height = `${svgRect2.height}px`;
     // const select_world = document.getElementsByClassName("world_map");
     // select_world[0].appendChild(popup);
     document.body.appendChild(popup);
