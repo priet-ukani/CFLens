@@ -8,9 +8,18 @@ const projection = d3.geoMercator()
   .translate([width / 2, height / 2]);
 
 const data = new Map();
+range=[0,4000]
+if(selectedValue!="MaxRating")
+{
+    range=[0,2000]
+}
+
 var colorScale = d3.scaleLinear()
-    .domain([0, 3000]) // Define the range of values
-    .range(["#ddddff", "#0000ff"]);
+
+    .domain(range) // Define the range of values
+    // .range(["#ddddff", "#0000ff"]);
+    .range(["#e5f5e0", "#006d2c"]);
+
 
     function generatePopupContent(countryName, dataType) {
       // Create a container for the popup content
@@ -283,35 +292,35 @@ document.getElementById("slider").addEventListener("change", function() {
   // Redraw the map and bar chart with the updated data based on the selected value
   make_graph(selectedValue, currentCountryName);
 
-  if (currentCountryName != null) {
-      // var temp3_value = selectedValue === "MaxRating" ? "maxRating" : "avgRating";
-      removePopup();
-      console.log("Bhai");
-      // generatePopupContent(temp3_value, currentCountryName);
-      const popup = document.createElement("div");
-      popup.classList.add("popup-container");
+//   if (currentCountryName != null) {
+//       // var temp3_value = selectedValue === "MaxRating" ? "maxRating" : "avgRating";
+//       removePopup();
+//       console.log("Bhai");
+//       // generatePopupContent(temp3_value, currentCountryName);
+//       const popup = document.createElement("div");
+//       popup.classList.add("popup-container");
   
-      var temp_value = selectedValue === "MaxRating" ? "maxRating" : "avgRating";
-      const popupContent = generatePopupContent(currentCountryName, temp_value);
-      popup.innerHTML = popupContent;
+//       var temp_value = selectedValue === "MaxRating" ? "maxRating" : "avgRating";
+//       const popupContent = generatePopupContent(currentCountryName, temp_value);
+//       popup.innerHTML = popupContent;
   
-      const svg = d3.select("#my_dataviz");
-      const svgRect = svg.node().getBoundingClientRect();
+//       const svg = d3.select("#my_dataviz");
+//       const svgRect = svg.node().getBoundingClientRect();
   
-      popup.style.left = `${svgRect.left}px`;
-    //   popup.style.top = `${svgRect.top}px`;
-      popup.style.width = `${svgRect.width}px`;
-      popup.style.height = `${svgRect.height}px`;
+//       popup.style.left = `${svgRect.left}px`;
+//     //   popup.style.top = `${svgRect.top}px`;
+//       popup.style.width = `${svgRect.width}px`;
+//       popup.style.height = `${svgRect.height}px`;
   
-      document.body.appendChild(popup);
+//       document.body.appendChild(popup);
   
-      const closeBtn = popup.querySelector(".close-btn");
-      closeBtn.addEventListener("click", function() {
-          document.body.removeChild(popup);
-          make_graph(selectedValue, null);
-          currentCountryName=null;
-      });
-  }
+//       const closeBtn = popup.querySelector(".close-btn");
+//       closeBtn.addEventListener("click", function() {
+//           document.body.removeChild(popup);
+//           make_graph(selectedValue, null);
+//           currentCountryName=null;
+//       });
+//   }
 });
 
 function removePopup() {

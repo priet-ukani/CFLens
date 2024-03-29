@@ -66,7 +66,7 @@ body {
 }
 
 .tick text {
-    fill: #8E8883;
+    fill: #000000;
     font-size: 12pt;
     font-family: "Fira Code", "Times New Roman"
 }
