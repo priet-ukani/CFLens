@@ -9,10 +9,7 @@ const projection = d3.geoMercator()
 
 const data = new Map();
 range=[0,4000]
-if(selectedValue!="MaxRating")
-{
-    range=[0,2000]
-}
+
 
 var colorScale = d3.scaleLinear()
 
@@ -211,6 +208,14 @@ var colorScale = d3.scaleLinear()
 
 
 function make_graph(dataType, countryName) {
+    if(selectedValue!="MaxRating")
+{
+    range=[0,2000]
+}
+else 
+{
+    range=[0,4000]
+}
   Promise.all([
       d3.json("https://enjalot.github.io/wwsd/data/world/world-110m.geojson"),
       d3.csv("countryStats.csv", function(d) {
