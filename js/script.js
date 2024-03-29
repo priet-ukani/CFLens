@@ -1,3 +1,4 @@
+// totals_save has the data for all the tags
 var totals_save = [
     {
         title: "math",
@@ -185,6 +186,7 @@ var totals_save = [
         all: 28759
     }
 ];
+// totals has the data for the tags used for plotting pie-chart
 var totals = [
     {
         title: "math",
@@ -372,6 +374,7 @@ var totals = [
         all: 28759
     }
 ];
+// totals_small has the data for top 10 tags by Count
 var totals_small = [
     {
         title: "math",
@@ -424,20 +427,25 @@ var totals_small = [
         all: 16950
     }
 ];
-var temp=d3.select('#donut')
-.append('svg')
-.attr('class', 'pie');
-function pie2()
+
+
+var temp=d3.select('#donut')    // select the div element with the id 'donut'
+.append('svg')  // append an svg element
+.attr('class', 'pie'); // add a class to the svg element
+
+function pie2() // function to draw the pie chart
 {
-    d3.select("#donut").selectAll("svg").remove();
+    d3.select("#donut").selectAll("svg").remove(); // remove the existing svg element
     
+    // Setting the dimensions of the pie chart
     var width = 360;
     var height = 360;
     var radius = Math.min(width, height) / 2;
     var donutWidth = 75;
-    var color = d3.scaleOrdinal()
+    var color = d3.scaleOrdinal()   // setting the color scale
         .range(["#5A39AC", "#DD98D6", "#E7C820", "#08B2B2"]);
     
+        // setting the svg element
     var svg = d3.select('#donut')
         .append('svg')
         .attr('class', 'pie')
@@ -447,19 +455,23 @@ function pie2()
         .attr('transform', 'translate(' + (width / 2) +
             ',' + (height / 2) + ')');
     
+            // setting the arc and pie
     var arc = d3.arc()
         .innerRadius(radius - donutWidth)
         .outerRadius(radius);
     
+        // setting the pie
     var pie = d3.pie()
         .value(function (d) {
             return d.value;
         })
         .sort(null);
     
+        // setting the legend
     var legendRectSize = 13;
     var legendSpacing = 7;
     
+    // setting the tooltip
     var donutTip = d3.select("#donuttipDIV").append("div")
         .attr("class", "donut-tip")
         .style("opacity", 0)
@@ -470,7 +482,7 @@ function pie2()
 
         .style("position", "absolute");
 
-    
+    // setting the path
     var path = svg.selectAll('path')
         .data(pie(totals))
         .enter()
@@ -481,24 +493,37 @@ function pie2()
         })
         .attr('transform', 'translate(0, 0)')
         .on('mouseover', function (event,d, i) {
-            d3.select(this).transition()
+            // Setting the opacity of the path and transition
+            d3.select(this)
                 .attr('opacity', '.85');
-            donutTip.transition()
+            donutTip
                 .style("opacity", 1);
                 let tagname= d.data.title;
                 let num = ((d.value / d.data.all) * 100).toFixed(2) + '%';
                 donutTip.html(tagname+"-"+d.value)
                 .style("left", parseInt(event.pageX + 10) + "px")
-                .style("top", parseInt(event.pageY + 10) + "px");
+                .style("top", parseInt(event.pageY - 15) + "px");
+    
+        })
+        .on('mousemove', function (event,d, i) {
+            // Setting the opacity of the path and transition
+            d3.select(this)
+                .attr('opacity', '.85');
+            donutTip
+                .style("opacity", 1);
+                let tagname= d.data.title;
+                let num = ((d.value / d.data.all) * 100).toFixed(2) + '%';
+                donutTip.html(tagname+"-"+d.value)
+                .style("left", parseInt(event.pageX + 10) + "px")
+                .style("top", parseInt(event.pageY - 15) + "px");
     
         })
         .on('mouseout', function (d, i) {
-            d3.select(this).transition()
-                .duration('50')
+            // Setting the opacity of the path and transition
+            d3.select(this)
                 .attr('opacity', '1');
 
-            donutTip.transition()
-                .duration('50')
+            donutTip
                 .style("opacity", 0);
         });
     
@@ -530,25 +555,25 @@ function pie2()
     //         return d;
     //     });
     
-    function change(data) {
-        var pie = d3.pie()
-            .value(function (d) {
-                return d.value;
-            }).sort(null)(data);
+    // function change(data) {
+    //     var pie = d3.pie()
+    //         .value(function (d) {
+    //             return d.value;
+    //         }).sort(null)(data);
     
-        var width = 360;
-        var height = 360;
-        var radius = Math.min(width, height) / 2;
-        var donutWidth = 75;
+    //     var width = 360;
+    //     var height = 360;
+    //     var radius = Math.min(width, height) / 2;
+    //     var donutWidth = 75;
     
-        path = d3.select("#donut")
-            .selectAll("path")
-            .data(pie); // Compute the new angles
-        var arc = d3.arc()
-            .innerRadius(radius - donutWidth)
-            .outerRadius(radius);
-        path.transition().duration(500).attr("d", arc); // redrawing the path with a smooth transition
-    }
+    //     path = d3.select("#donut")
+    //         .selectAll("path")
+    //         .data(pie); // Compute the new angles
+    //     var arc = d3.arc()
+    //         .innerRadius(radius - donutWidth)
+    //         .outerRadius(radius);
+    //     path.transition().duration(500).attr("d", arc); // redrawing the path with a smooth transition
+    // }
     
 };
 d3.select("button#everyone")
@@ -1014,3 +1039,4 @@ function removePopup() {
 
 // Draw the map and bar chart with the initial data
 make_graph(selectedValue, null);
+
