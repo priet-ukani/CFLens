@@ -1,3 +1,20 @@
+/* 
+
+1   The code starts by declaring some variables and retrieving configuration options from the config object.
+2   It defines a function getColor that determines the color for each data point based on the configuration settings. If changeable_color is true, it uses an interpolated color range based on the rate of change for that data point. Otherwise, it assigns colors based on the divide_color_by property of the data.
+3   The code sets up various configuration options related to chart formatting, margins, labels, and animation.
+4   It defines a function getCurrentData that filters the data for a specific date, calculates the rate of change for each data point, sorts the data based on the configuration, and limits the number of data points to max_number.
+5   The draw function is the main function responsible for creating and updating the visualization. It starts by processing the data, creating unique date and name arrays, sorting the dates, and initializing color palettes.
+6   It sets up the SVG container, defines scales for the x and y axes, and creates the axis elements.
+7   The function redraw is called to create or update the bar elements for the current data. This function handles the enter, update, and exit selections for the bars, transitioning and animating them based on the configuration settings.
+8   The change function is called to update the position of the bars based on the current data and the chosen animation type.
+9   An interval is set using setInterval to update the visualization at a specified rate. The getCurrentData function is called within this interval to retrieve the data for the current date, and redraw and change are called to update the visualization.
+10  The interval continues until all dates have been processed, at which point it is cleared using clearInterval.
+11  The code also includes event listeners for checkboxes to pause or play the animation and toggle color blindness mode (commented out).
+The code follows a common pattern for creating D3.js visualizations. It sets up the necessary scales, axes, and SVG elements, and then uses D3's data binding and transitions to create and update the bar elements based on the provided data. The configuration options allow for customizing various aspects of the visualization, such as colors, labels, animation, and data sorting.
+
+*/
+
 
 var state = 'play';
 // OPTION to keep a button to make the graph black and white 
