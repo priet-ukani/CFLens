@@ -489,7 +489,7 @@ function pie2()
                 let num = ((d.value / d.data.all) * 100).toFixed(2) + '%';
                 donutTip.html(tagname+"-"+d.value)
                 .style("left", parseInt(event.pageX + 10) + "px")
-                .style("top", parseInt(event.pageY - 15) + "px");
+                .style("top", parseInt(event.pageY + 10) + "px");
     
         })
         .on('mouseout', function (d, i) {
