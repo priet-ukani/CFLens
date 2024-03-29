@@ -1,0 +1,38 @@
+TagName,Count
+math,2706
+greedy,2669
+implementation,2606
+dp,2000
+constructive algorithms,1642
+data structures,1632
+brute force,1565
+graphs,1024
+sortings,1009
+binary search,992
+dfs and similar,883
+trees,773
+number theory,695
+strings,691
+combinatorics,631
+bitmasks,530
+two pointers,507
+*special,426
+geometry,380
+dsu,337
+divide and conquer,270
+shortest paths,259
+probabilities,226
+interactive,212
+games,203
+hashing,194
+flows,139
+matrices,115
+fft,89
+graph matchings,88
+string suffix structures,87
+ternary search,52
+meet-in-the-middle,47
+expression parsing,35
+2-sat,30
+chinese remainder theorem,16
+schedules,8

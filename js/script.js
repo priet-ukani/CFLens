@@ -1,3 +1,584 @@
+var totals_save = [
+    {
+        title: "math",
+        value: 2706,
+        all: 28759
+    },
+    {
+        title: "greedy",
+        value: 2669,
+        all: 28759
+    },
+    {
+        title: "implementation",
+        value: 2606,
+        all: 28759
+    },
+    {
+        title: "dp",
+        value: 2000,
+        all: 28759
+    },
+    {
+        title: "constructive algorithms",
+        value: 1642,
+        all: 28759
+    },
+    {
+        title: "data structures",
+        value: 1632,
+        all: 28759
+    },
+    {
+        title: "brute force",
+        value: 1565,
+        all: 28759
+    },
+    {
+        title: "graphs",
+        value: 1024,
+        all: 28759
+    },
+    {
+        title: "sortings",
+        value: 1009,
+        all: 28759
+    },
+    {
+        title: "binary search",
+        value: 992,
+        all: 28759
+    },
+    {
+        title: "dfs and similar",
+        value: 883,
+        all: 28759
+    },
+    {
+        title: "trees",
+        value: 773,
+        all: 28759
+    },
+    {
+        title: "number theory",
+        value: 695,
+        all: 28759
+    },
+    {
+        title: "strings",
+        value: 691,
+        all: 28759
+    },
+    {
+        title: "combinatorics",
+        value: 631,
+        all: 28759
+    },
+    {
+        title: "bitmasks",
+        value: 530,
+        all: 28759
+    },
+    {
+        title: "two pointers",
+        value: 507,
+        all: 28759
+    },
+    {
+        title: "*special",
+        value: 426,
+        all: 28759
+    },
+    {
+        title: "geometry",
+        value: 380,
+        all: 28759
+    },
+    {
+        title: "dsu",
+        value: 337,
+        all: 28759
+    },
+    {
+        title: "divide and conquer",
+        value: 270,
+        all: 28759
+    },
+    {
+        title: "shortest paths",
+        value: 259,
+        all: 28759
+    },
+    {
+        title: "probabilities",
+        value: 226,
+        all: 28759
+    },
+    {
+        title: "interactive",
+        value: 212,
+        all: 28759
+    },
+    {
+        title: "games",
+        value: 203,
+        all: 28759
+    },
+    {
+        title: "hashing",
+        value: 194,
+        all: 28759
+    },
+    {
+        title: "flows",
+        value: 139,
+        all: 28759
+    },
+    {
+        title: "matrices",
+        value: 115,
+        all: 28759
+    },
+    {
+        title: "fft",
+        value: 89,
+        all: 28759
+    },
+    {
+        title: "graph matchings",
+        value: 88,
+        all: 28759
+    },
+    {
+        title: "string suffix structures",
+        value: 87,
+        all: 28759
+    },
+    {
+        title: "ternary search",
+        value: 52,
+        all: 28759
+    },
+    {
+        title: "meet-in-the-middle",
+        value: 47,
+        all: 28759
+    },
+    {
+        title: "expression parsing",
+        value: 35,
+        all: 28759
+    },
+    {
+        title: "2-sat",
+        value: 30,
+        all: 28759
+    },
+    {
+        title: "chinese remainder theorem",
+        value: 16,
+        all: 28759
+    },
+    {
+        title: "schedules",
+        value: 8,
+        all: 28759
+    }
+];
+var totals = [
+    {
+        title: "math",
+        value: 2706,
+        all: 28759
+    },
+    {
+        title: "greedy",
+        value: 2669,
+        all: 28759
+    },
+    {
+        title: "implementation",
+        value: 2606,
+        all: 28759
+    },
+    {
+        title: "dp",
+        value: 2000,
+        all: 28759
+    },
+    {
+        title: "constructive algorithms",
+        value: 1642,
+        all: 28759
+    },
+    {
+        title: "data structures",
+        value: 1632,
+        all: 28759
+    },
+    {
+        title: "brute force",
+        value: 1565,
+        all: 28759
+    },
+    {
+        title: "graphs",
+        value: 1024,
+        all: 28759
+    },
+    {
+        title: "sortings",
+        value: 1009,
+        all: 28759
+    },
+    {
+        title: "binary search",
+        value: 992,
+        all: 28759
+    },
+    {
+        title: "dfs and similar",
+        value: 883,
+        all: 28759
+    },
+    {
+        title: "trees",
+        value: 773,
+        all: 28759
+    },
+    {
+        title: "number theory",
+        value: 695,
+        all: 28759
+    },
+    {
+        title: "strings",
+        value: 691,
+        all: 28759
+    },
+    {
+        title: "combinatorics",
+        value: 631,
+        all: 28759
+    },
+    {
+        title: "bitmasks",
+        value: 530,
+        all: 28759
+    },
+    {
+        title: "two pointers",
+        value: 507,
+        all: 28759
+    },
+    {
+        title: "*special",
+        value: 426,
+        all: 28759
+    },
+    {
+        title: "geometry",
+        value: 380,
+        all: 28759
+    },
+    {
+        title: "dsu",
+        value: 337,
+        all: 28759
+    },
+    {
+        title: "divide and conquer",
+        value: 270,
+        all: 28759
+    },
+    {
+        title: "shortest paths",
+        value: 259,
+        all: 28759
+    },
+    {
+        title: "probabilities",
+        value: 226,
+        all: 28759
+    },
+    {
+        title: "interactive",
+        value: 212,
+        all: 28759
+    },
+    {
+        title: "games",
+        value: 203,
+        all: 28759
+    },
+    {
+        title: "hashing",
+        value: 194,
+        all: 28759
+    },
+    {
+        title: "flows",
+        value: 139,
+        all: 28759
+    },
+    {
+        title: "matrices",
+        value: 115,
+        all: 28759
+    },
+    {
+        title: "fft",
+        value: 89,
+        all: 28759
+    },
+    {
+        title: "graph matchings",
+        value: 88,
+        all: 28759
+    },
+    {
+        title: "string suffix structures",
+        value: 87,
+        all: 28759
+    },
+    {
+        title: "ternary search",
+        value: 52,
+        all: 28759
+    },
+    {
+        title: "meet-in-the-middle",
+        value: 47,
+        all: 28759
+    },
+    {
+        title: "expression parsing",
+        value: 35,
+        all: 28759
+    },
+    {
+        title: "2-sat",
+        value: 30,
+        all: 28759
+    },
+    {
+        title: "chinese remainder theorem",
+        value: 16,
+        all: 28759
+    },
+    {
+        title: "schedules",
+        value: 8,
+        all: 28759
+    }
+];
+var totals_small = [
+    {
+        title: "math",
+        value: 2706,
+        all: 16950
+    },
+    {
+        title: "greedy",
+        value: 2669,
+        all: 16950
+    },
+    {
+        title: "implementation",
+        value: 2606,
+        all: 16950
+    },
+    {
+        title: "dp",
+        value: 2000,
+        all: 16950
+    },
+    {
+        title: "constructive algorithms",
+        value: 1642,
+        all: 16950
+    },
+    {
+        title: "data structures",
+        value: 1632,
+        all: 16950
+    },
+    {
+        title: "brute force",
+        value: 1565,
+        all: 16950
+    },
+    {
+        title: "graphs",
+        value: 1024,
+        all: 16950
+    },
+    {
+        title: "sortings",
+        value: 1009,
+        all: 16950
+    },
+    {
+        title: "binary search",
+        value: 992,
+        all: 16950
+    }
+];
+var temp=d3.select('#donut')
+.append('svg')
+.attr('class', 'pie');
+function pie2()
+{
+    d3.select("#donut").selectAll("svg").remove();
+    
+    var width = 360;
+    var height = 360;
+    var radius = Math.min(width, height) / 2;
+    var donutWidth = 75;
+    var color = d3.scaleOrdinal()
+        .range(["#5A39AC", "#DD98D6", "#E7C820", "#08B2B2"]);
+    
+    var svg = d3.select('#donut')
+        .append('svg')
+        .attr('class', 'pie')
+        .attr('width', width)
+        .attr('height', height)
+        .append('g')
+        .attr('transform', 'translate(' + (width / 2) +
+            ',' + (height / 2) + ')');
+    
+    var arc = d3.arc()
+        .innerRadius(radius - donutWidth)
+        .outerRadius(radius);
+    
+    var pie = d3.pie()
+        .value(function (d) {
+            return d.value;
+        })
+        .sort(null);
+    
+    var legendRectSize = 13;
+    var legendSpacing = 7;
+    
+    var donutTip = d3.select("#donuttipDIV").append("div")
+        .attr("class", "donut-tip")
+        .style("opacity", 0)
+        // add styling to add border and also text colour 
+        .style("background-color", "white")
+        .style("border", "1px solid black")
+        .style("padding", "5px")
+
+        .style("position", "absolute");
+
+    
+    var path = svg.selectAll('path')
+        .data(pie(totals))
+        .enter()
+        .append('path')
+        .attr('d', arc)
+        .attr('fill', function (d, i) {
+            return color(d.data.title);
+        })
+        .attr('transform', 'translate(0, 0)')
+        .on('mouseover', function (event,d, i) {
+            d3.select(this).transition()
+                .attr('opacity', '.85');
+            donutTip.transition()
+                .style("opacity", 1);
+                let tagname= d.data.title;
+                let num = ((d.value / d.data.all) * 100).toFixed(2) + '%';
+                donutTip.html(tagname+"-"+d.value)
+                .style("left", parseInt(event.pageX + 10) + "px")
+                .style("top", parseInt(event.pageY - 15) + "px");
+    
+        })
+        .on('mouseout', function (d, i) {
+            d3.select(this).transition()
+                .duration('50')
+                .attr('opacity', '1');
+
+            donutTip.transition()
+                .duration('50')
+                .style("opacity", 0);
+        });
+    
+    
+    // var legend = svg.selectAll('.legend')
+    //     .data(color.domain())
+    //     .enter()
+    //     .append('g')
+    //     .attr('class', 'circle-legend')
+    //     .attr('transform', function (d, i) {
+    //         var height = legendRectSize + legendSpacing;
+    //         var offset = height * color.domain().length / 2;
+    //         var horz = -2 * legendRectSize - 13;
+    //         var vert = i * height - offset;
+    //         return 'translate(' + horz + ',' + vert + ')';
+    //     });
+    
+    // legend.append('circle')
+    //     .style('fill', color)
+    //     .style('stroke', color)
+    //     .attr('cx', 0)
+    //     .attr('cy', 0)
+    //     .attr('r', '.5rem');
+    
+    // legend.append('text')
+    //     .attr('x', legendRectSize + legendSpacing)
+    //     .attr('y', legendRectSize - legendSpacing)
+    //     .text(function (d) {
+    //         return d;
+    //     });
+    
+    function change(data) {
+        var pie = d3.pie()
+            .value(function (d) {
+                return d.value;
+            }).sort(null)(data);
+    
+        var width = 360;
+        var height = 360;
+        var radius = Math.min(width, height) / 2;
+        var donutWidth = 75;
+    
+        path = d3.select("#donut")
+            .selectAll("path")
+            .data(pie); // Compute the new angles
+        var arc = d3.arc()
+            .innerRadius(radius - donutWidth)
+            .outerRadius(radius);
+        path.transition().duration(500).attr("d", arc); // redrawing the path with a smooth transition
+    }
+    
+};
+d3.select("button#everyone")
+    .on("click", function () {
+        console.log("hello");
+        // change(totals);
+        // const existingPopup = document.querySelector(".pie"); // Get the existing popup container
+        // if (existingPopup) {
+        //     document.body.removeChild(existingPopup); // Remove the popup container
+        // }
+        totals=totals_save;
+        pie2();
+    })
+    d3.select("button#women")
+    .on("click", function () {
+        console.log("hello2 ");
+        // const existingPopup = document.querySelector(".pie"); // Get the existing popup container
+        // if (existingPopup) {
+        //   document.body.removeChild(existingPopup); // Remove the popup container
+        // }
+        totals=totals_small;
+        pie2();
+    })
+// d3.select("button#men")
+//     .on("click", function () {
+//         change(maleData)
+//     })
+pie2();
+
+
 // Getting the svg element and setting the width and height
 const svg = d3.select("#my_dataviz"),
   width = +svg.attr("width"),
