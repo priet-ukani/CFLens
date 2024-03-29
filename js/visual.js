@@ -137,7 +137,7 @@ const config = {
 //   };
 
 // loading data from csv file which contains scraped data.
-d3.csv("data.csv").then(function(data) {
+d3.csv("Data/TopCoder.csv").then(function(data) {
     // Call the draw function with the loaded data
     global_store_data=data
     draw(data);
