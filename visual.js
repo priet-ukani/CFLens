@@ -102,6 +102,13 @@ const config = {
     showLabel: true,
     labelx: -10,
     use_img: true,
+    imgs: {
+      item:
+        "http://i1.hdslb.com/bfs/face/983034448f81f45f05956d0455a86fe0639d6a36.jpg",
+      name:
+        "http://i1.hdslb.com/bfs/face/983034448f81f45f05956d0455a86fe0639d6a36.jpg",
+      img: "path/to/img"
+    },
     background_color: "#FFFFFF",
     rounded_rectangle: true, 
     show_x_tick: true,
