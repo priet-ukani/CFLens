@@ -45,7 +45,7 @@ var colorScale = d3.scaleLinear()   // Color scale
       popupContentContainer.innerHTML = popupContent;
   
       // Fetch data from CSV file and generate bar chart
-      d3.csv("orgStats.csv").then(function(orgData) {
+      d3.csv("../Data/orgStats.csv").then(function(orgData) {
           // Filter data based on the country name
           const filteredData = orgData.filter(function(d) {
               var country_name_filter = d.Country;
@@ -233,7 +233,7 @@ function make_graph(dataType, countryName) {
     // Load the data from the CSV file and the GeoJSON file
   Promise.all([
       d3.json("https://enjalot.github.io/wwsd/data/world/world-110m.geojson"),
-      d3.csv("countryStats.csv", function(d) {
+      d3.csv("../Data/countryStats.csv", function(d) {
           data.set(d.Country, +parseFloat(d[dataType])); // Use the selected data type here
       })
   ]).then(function(loadData){
