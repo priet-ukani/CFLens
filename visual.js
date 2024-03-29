@@ -1,10 +1,13 @@
 
 var state = 'play';
+// OPTION to keep a button to make the graph black and white 
 // var colourBlind= 'colorBlind';
 // Get the checkbox element
 const checkbox = document.getElementById('flexSwitchCheckChecked');
 var global_store_data
 
+
+// event listener for change
 checkbox.addEventListener('change', function() {
     // Check if the checkbox is checked
     if (this.checked) {
@@ -53,6 +56,10 @@ function pauseFunction() {
 // });
 
 const config = {
+    /* 
+     contains the basic settings for starting the visualisation
+     like position , size , formatting etc. 
+    */
     encoding: "UTF-8",
     max_number: 20,
     showMessage: true,
@@ -128,6 +135,8 @@ const config = {
 //       alert(error);
 //     }
 //   };
+
+// loading data from csv file which contains scraped data.
 d3.csv("data.csv").then(function(data) {
     // Call the draw function with the loaded data
     global_store_data=data
@@ -137,73 +146,114 @@ d3.csv("data.csv").then(function(data) {
     console.error("Error loading the data:", error);
 });  
 
-
+// the main draw function which reloads the graph and updates the values as time changes
+/**
+ * Draws a visualization based on the provided data.
+ *
+ * @param {Array} data - The data to be visualized.
+ */
 function draw(data) {
-  var date = [];
-  data.forEach(element => {
+ // Create an empty array to store unique dates
+var date = [];
+
+// Iterate through the data and push unique dates into the date array
+data.forEach(element => {
     if (date.indexOf(element["date"]) == -1) {
-      date.push(element["date"]);
+        date.push(element["date"]);
     }
-  });
-  let rate = [];
-  var auto_sort = config.auto_sort;
-  if (auto_sort) {
+});
+
+// Create an empty array to store rates
+let rate = [];
+
+// Get the auto_sort value from the configuration
+var auto_sort = config.auto_sort;
+
+// If auto_sort is true, sort the dates in ascending order
+if (auto_sort) {
     var time = date.sort((x, y) => new Date(x) - new Date(y));
-  } else {
+} else {
+    // Otherwise, use the unsorted dates
     var time = date;
-  }
-  var use_semilogarithmic_coordinate = config.use_semilogarithmic_coordinate;
-  var big_value = config.big_value;
-  var divide_by = config.divide_by;
-  var divide_color_by = config.divide_color_by;
-  var name_list = [];
-  var changeable_color = config.changeable_color;
-  var divide_changeable_color_by_type = config.divide_changeable_color_by_type;
-  data
-    .sort((a, b) => Number(b.value) - Number(a.value))
-    .forEach(e => {
-      if (name_list.indexOf(e.name) == -1) {
-        name_list.push(e.name);
-      }
-    });
-  var baseTime = 3000;
+}
 
-  var user_pallete = config.color_palette;
-  var product_palette = user_pallete.length !== 0 ? user_pallete : d3.schemeCategory10;
-  function getColor(d) {
+// getting the default values for start from the configuration settings
+var use_semilogarithmic_coordinate = config.use_semilogarithmic_coordinate;
+var big_value = config.big_value;
+var divide_by = config.divide_by;
+var divide_color_by = config.divide_color_by;
+var changeable_color = config.changeable_color;
+var divide_changeable_color_by_type = config.divide_changeable_color_by_type;
+var user_pallete = config.color_palette;
+
+// Create an empty array to store unique names
+var name_list = [];
+
+// Sort the data in descending order of value
+data.sort((a, b) => Number(b.value) - Number(a.value))
+    // Iterate through the sorted data and push unique names into the name_list array
+    .forEach(e => {
+        if (name_list.indexOf(e.name) == -1) {
+            name_list.push(e.name);
+        }
+    });
+
+// Set a base time for animation (in milliseconds)
+var baseTime = 3000;
+
+// If a user-defined palette is provided, use it; otherwise, use the default d3.schemeCategory10
+var product_palette
+if(user_pallete.length!==0){
+    product_palette = user_pallete
+}else{
+    product_palette = d3.schemeCategory10
+}
+// Function to get the color for a given data point
+function getColor(d) {
     var r = 0.0;
+
+    // If changeable_color is true
     if (changeable_color) {
-      var colorRange = d3.interpolateCubehelix(
-        config.color_range[0],
-        config.color_range[1]
-      );
-      if (divide_changeable_color_by_type && d["type"] in config.color_ranges) {
+        // Create a color range interpolator using the specified color range
         var colorRange = d3.interpolateCubehelix(
-          config.color_ranges[d["type"]][0],
-          config.color_ranges[d["type"]][1]
+            config.color_range[0],
+            config.color_range[1]
         );
-      }
-      var v =
-        Math.abs(rate[d.name] - rate["MIN_RATE"]) /
-        (rate["MAX_RATE"] - rate["MIN_RATE"]);
-      if (isNaN(v) || v == -1) {
-        return colorRange(0.6);
-      }
-      return colorRange(v);
+
+        if (divide_changeable_color_by_type && d["type"] in config.color_ranges) {
+            // Create a color range interpolator using the specified color range for the data point's type
+            var colorRange = d3.interpolateCubehelix(
+                config.color_ranges[d["type"]][0],
+                config.color_ranges[d["type"]][1]
+            );
+        }
+
+        // Calculate the normalized value based on the rate with the formula
+        var v = Math.abs(rate[d.name] - rate["MIN_RATE"]) / (rate["MAX_RATE"] - rate["MIN_RATE"]);
+
+        // If the value is NaN or -1, use a default color
+        if (isNaN(v) || v == -1) {
+            return colorRange(0.6);
+        }
+
+        // Otherwise, return the color from the interpolator based on the normalized value
+        return colorRange(v);
     }
 
-    // if (colourBlind==='normal')
-    // {
-
-        if (d[divide_color_by] in config.color)
+    // if (colourBlind==='normal') // {
+    // Check if a color is defined for the divide_color_by value
+    if (d[divide_color_by] in config.color) {
+        // Return the defined color
         return config.color[d[divide_color_by]];
-    else {
+    } else {
+        // Otherwise, return a color from the product_palette based on the divide_color_by value
         return product_palette[
             Math.floor(d[divide_color_by].charCodeAt() % product_palette.length)
         ];
+    }
     // }
 }
-  }
+// below function for the colour for colour blind functionality
 // function getColor(d) {
 //     var r = 0.0;
 //     if (changeable_color) {
@@ -231,23 +281,17 @@ function draw(data) {
 //       return grayColor;
 //     }
 //   }
+
+
+    // getting the default values for start from the configuration settings
   var showMessage = config.showMessage;
-  var allow_up = config.allow_up;
   var always_up = config.always_up;
   var interval_time = config.interval_time;
-  var text_y = config.text_y;
-  var itemLabel = config.itemLabel;
   var typeLabel = config.typeLabel;
+  var text_y = config.text_y;
+  var allow_up = config.allow_up;
   var display_barInfo = config.display_barInfo;
-  if (config.use_type_info) {
-    var use_type_info = config.use_type_info;
-  } else if (divide_by != "name") {
-    var use_type_info = true;
-  } else {
-    var use_type_info = false;
-  }
   var use_counter = config.use_counter;
-
   var step = config.step;
   var long = config.long;
   var format = config.format;
@@ -263,91 +307,144 @@ function draw(data) {
   var offset = config.offset;
   var animation = config.animation;
   var deformat = config.deformat;
-
+  var itemLabel = config.itemLabel;
+  // setting the margin
   const margin = {
     left: left_margin,
     right: right_margin,
     top: top_margin,
     bottom: bottom_margin
   };
-  var background_color = config.background_color;
 
-  d3.select("body").attr("style", "background:" + background_color);
+  if (config.use_type_info) {
+    var use_type_info = config.use_type_info;  
+  } else if (divide_by != "name") {
+    var use_type_info = true;  
+  } else {
+    var use_type_info = false;  
+  }  
+ // Get the background color from the configuration
+var background_color = config.background_color;
 
-  var enter_from_0 = config.enter_from_0;
-  interval_time /= 3;
-  var lastData = [];
-  var currentdate = time[0].toString();
-  var currentData = [];
-  var lastname;
-  const svg = d3.select("svg");
+// Set the background color of the body
+d3.select("body").attr("style", "background:" + background_color);
 
-  const width = svg.attr("width");
-  const height = svg.attr("height");
-  const innerWidth = width - margin.left - margin.right;
-  const innerHeight = height - margin.top - margin.bottom - 32;
-  const xValue = d => Number(d.value);
-  const yValue = d => d.name;
+// Get the enter_from_0 value from the configuration
+var enter_from_0 = config.enter_from_0;
 
-  const g = svg
+// Divide the interval_time by 3
+interval_time /= 3;
+
+// Initialize an empty array to store the last data
+var lastData = [];
+
+// Get the first date from the time array and convert it to a string
+var currentdate = time[0].toString();
+
+// Initialize an empty array to store the current data
+var currentData = [];
+
+// Initialize a variable to store the last name
+var lastname;
+
+// Select the SVG element
+const svg = d3.select("svg");
+
+// Get the width and height of the SVG element
+const width = svg.attr("width");
+const height = svg.attr("height");
+
+// Calculate the inner width and height of the SVG element after accounting for margins
+const innerWidth = width - margin.left - margin.right;
+const innerHeight = height - margin.top - margin.bottom - 32;
+
+// Define a function to extract the value from a data point
+const xValue = d => Number(d.value);
+
+// Define a function to extract the name from a data point
+const yValue = d => d.name;
+
+// Create a new group element within the SVG and translate it based on the margins
+const g = svg
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
-  const xAxisG = g
+
+// Create a new group element for the x-axis and translate it to the bottom of the chart area
+const xAxisG = g
     .append("g")
     .attr("transform", `translate(0, ${innerHeight})`);
-  const yAxisG = g.append("g");
 
-  xAxisG
+// Create a new group element for the y-axis
+const yAxisG = g.append("g");
+
+// Append a text element for the x-axis label
+xAxisG
     .append("text")
     .attr("class", "axis-label")
     .attr("x", innerWidth / 2)
     .attr("y", 100);
 
-  var xScale = d3.scaleLinear();
-  if (use_semilogarithmic_coordinate) {
+// Initialize the x-scale
+var xScale = d3.scaleLinear();
+
+// If use_semilogarithmic_coordinate is true, use a power scale with exponent 0.5
+if (use_semilogarithmic_coordinate) {
     xScale = d3.scalePow().exponent(0.5);
-  } else {
+} else {
     xScale = d3.scaleLinear();
-  }
-  const yScale = d3
+}
+
+// Initialize the y-scale as a band scale with padding
+const yScale = d3
     .scaleBand()
     .paddingInner(0.3)
     .paddingOuter(0);
 
-  const xTicks = 10;
-  const xAxis = d3
+// Set the number of ticks for the x-axis
+const xTicks = 10;
+
+// Create the x-axis using the xScale and configure tick formatting and size
+const xAxis = d3
     .axisBottom()
     .scale(xScale)
     .ticks(xTicks)
     .tickPadding(20)
     .tickFormat(d => {
-      if (d <= 0) {
-        return "";
-      }
-      return d3.format(",.0f")(d);
+        if (d <= 0) {
+            return "";
+        }
+        return d3.format(",.0f")(d);
     })
     .tickSize(-innerHeight);
 
-  const yAxis = d3
+// Create the y-axis using the yScale and configure tick padding and size
+const yAxis = d3
     .axisLeft()
     .scale(yScale)
     .tickPadding(5)
     .tickSize(-innerWidth);
 
-  var dateLabel_switch = config.dateLabel_switch;
-  var dateLabel_x = config.dateLabel_x;
-  var dateLabel_y = config.dateLabel_y;
+// Get the dateLabel_switch value from the configuration
+var dateLabel_switch = config.dateLabel_switch;
 
-  if (dateLabel_x == null || dateLabel_y == null) {
-    dateLabel_x = innerWidth; 
-    dateLabel_y = innerHeight; 
-  } 
-  if (dateLabel_switch == false) {
+// Get the dateLabel_x and dateLabel_y values from the configuration
+var dateLabel_x = config.dateLabel_x;
+var dateLabel_y = config.dateLabel_y;
+
+// If dateLabel_x or dateLabel_y is null, set them to the innerWidth and innerHeight, respectively
+if (dateLabel_x == null || dateLabel_y == null) {
+    dateLabel_x = innerWidth;
+    dateLabel_y = innerHeight;
+}
+
+// Set the visibility of the dateLabel based on the dateLabel_switch value
+if (dateLabel_switch == false) {
     dateLabel_switch = "hidden";
-  } else {
+} else {
     dateLabel_switch = "visible";
-  }
+}
 
+// Append a text element for the date label
   var dateLabel = g
     .insert("text")
     .data(currentdate)
@@ -359,56 +456,74 @@ function draw(data) {
       return "end";
     })
     .text(currentdate);
-
+    
   var topLabel = g
     .insert("text")
     .attr("class", "topLabel")
     .attr("x", item_x)
     .attr("y", text_y);
 
-  function dataSort() {
+    // Function to sort data based on value and name
+function dataSort() {
+    // Check if reverse sorting is enabled
     if (reverse) {
+      // Sort the data array in descending order
       currentData.sort(function (a, b) {
+        // If values are equal, sort by sum of ASCII codes of name characters
         if (Number(a.value) == Number(b.value)) {
           var r1 = 0;
           var r2 = 0;
+          // Calculate sum of ASCII codes for name of first element
           for (let index = 0; index < a.name.length; index++) {
             r1 = r1 + a.name.charCodeAt(index);
           }
+          // Calculate sum of ASCII codes for name of second element
           for (let index = 0; index < b.name.length; index++) {
             r2 = r2 + b.name.charCodeAt(index);
           }
+          // Sort by the difference in sum of ASCII codes
           return r2 - r1;
         } else {
+          // If values are not equal, sort by numerical value
           return Number(a.value) - Number(b.value);
         }
       });
     } else {
+      // Sort the data array in ascending order
       currentData.sort(function (a, b) {
+        // If values are equal, sort by sum of ASCII codes of name characters
         if (Number(a.value) == Number(b.value)) {
           var r1 = 0;
           var r2 = 0;
+          // Calculate sum of ASCII codes for name of first element
           for (let index = 0; index < a.name.length; index++) {
             r1 = r1 + a.name.charCodeAt(index);
           }
+          // Calculate sum of ASCII codes for name of second element
           for (let index = 0; index < b.name.length; index++) {
             r2 = r2 + b.name.charCodeAt(index);
           }
+          // Sort by the difference in sum of ASCII codes
           return r2 - r1;
         } else {
+          // If values are not equal, sort by numerical value in reverse order
           return Number(b.value) - Number(a.value);
         }
       });
     }
   }
-
+  
+  // Function to get current data for a specific date
   function getCurrentData(date) {
+    // Initialize variables
     rate = [];
     currentData = [];
     indexList = [];
-
+  
+    // Filter data for the specified date and non-zero values
     data.forEach(element => {
       if (element["date"] == date && parseFloat(element["value"]) != 0) {
+        // Truncate long names and add ellipsis if necessary
         if (element.name.length > config.bar_name_max) {
           tail = "...";
         } else {
@@ -418,7 +533,8 @@ function draw(data) {
         currentData.push(element);
       }
     });
-
+  
+    // Calculate rate of change for each element
     rate["MAX_RATE"] = 0;
     rate["MIN_RATE"] = 1;
     currentData.forEach(e => {
@@ -437,16 +553,21 @@ function draw(data) {
         rate["MIN_RATE"] = rate[e.name];
       }
     });
-
+  
+    // Sort the data
     dataSort();
+    // Slice the data array to limit the number of elements
     currentData = currentData.slice(0, max_number);
-
+  
+    // Perform transitions
     d3.transition("2")
       .each(redraw)
       .each(change);
+    // Update lastData with currentData
     lastData = currentData;
   }
-
+  
+  // Conditionally add text elements for information display
   if (showMessage) {
     var topInfo = g
       .insert("text")
@@ -454,13 +575,13 @@ function draw(data) {
       .attr("x", 0)
       .attr("y", text_y)
       .text(itemLabel);
-
+  
     g.insert("text")
       .attr("class", "growth")
       .attr("x", text_x)
       .attr("y", text_y)
       .text(typeLabel);
-
+  
     if (use_counter == true) {
       var days = g
         .insert("text")
@@ -477,6 +598,7 @@ function draw(data) {
       }
     }
   }
+  
 
   var lastname;
   var counter = {
