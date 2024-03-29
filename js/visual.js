@@ -137,7 +137,7 @@ const config = {
 //   };
 
 // loading data from csv file which contains scraped data.
-d3.csv("../Data/TopCoder.csv").then(function(data) {
+d3.csv("data.csv").then(function(data) {
     // Call the draw function with the loaded data
     global_store_data=data
     draw(data);
@@ -599,433 +599,441 @@ function dataSort() {
     }
   }
   
+// Declare variables
+var lastname; // Holds the last name processed
+var counter = { value: 1 }; // Counter object to keep track of values
+var avg = 0; // Average value placeholder
+var enter_from_now = true; // Flag to determine if entering from current time
 
-  var lastname;
-  var counter = {
-    value: 1
-  };
+// Function to redraw the visualization
+function redraw() {
+  // Check if there is data to draw
+  if (currentData.length == 0) return;
 
-  var avg = 0;
-  var enter_from_now = true;
+  // Adjust xScale domain based on data
+  if (big_value) {
+    // Adjust domain for large values
+    xScale.domain([
+      2 * d3.min(currentData, xValue) - d3.max(currentData, xValue),
+      d3.max(currentData, xValue) + 10
+    ]).range([0, innerWidth]);
+  } else {
+    // Adjust domain for regular values
+    xScale.domain([0, d3.max(currentData, xValue) + 1]).range([0, innerWidth]);
+  }
 
-  function redraw() {
-    if (currentData.length == 0) return;
-    if (big_value) {
-      xScale
-        .domain([
-          2 * d3.min(currentData, xValue) - d3.max(currentData, xValue),
-          d3.max(currentData, xValue) + 10
-        ])
-        .range([0, innerWidth]);
-    } else {
-      xScale
-        .domain([0, d3.max(currentData, xValue) + 1])
-        .range([0, innerWidth]);
-    }
-    if (auto_sort) {
-      dateLabel
-        .data(currentData)
+  // Update date label with transition
+  if (auto_sort) {
+    dateLabel.data(currentData)
+      .transition()
+      .duration(baseTime * interval_time)
+      .ease(d3.easeLinear)
+      .tween("text", function (d) {
+        var self = this;
+        var i = d3.interpolateDate(
+          new Date(self.textContent),
+          new Date(d.date)
+        );
+        return function (t) {
+          var dateformat = d3.timeFormat(timeFormat);
+          self.textContent = dateformat(i(t));
+        };
+      });
+  } else {
+    dateLabel.text(currentdate);
+  }
+
+  // Update x and y axes with transition
+  xAxisG.transition().duration(baseTime * interval_time).ease(d3.easeLinear).call(xAxis);
+  yAxisG.transition().duration(baseTime * interval_time).ease(d3.easeLinear).call(yAxis);
+
+  // Remove ticks from yAxisG and xAxisG if specified
+  yAxisG.selectAll(".tick").remove();
+  if (!config.show_x_tick) {
+    xAxisG.selectAll(".tick").remove();
+  }
+
+  // Update yScale domain and range
+  yScale.domain(currentData.map(d => d.name).reverse()).range([innerHeight, 0]);
+
+  // Update existing bars
+  var bar = g.selectAll(".bar").data(currentData, function (d) { return d.name; });
+
+  // Update top label if showMessage is true
+  if (showMessage) {
+    topLabel.data(currentData).text(function (d) {
+      if (lastname == d.name) {
+        counter.value = counter.value + step;
+      } else {
+        counter.value = 1;
+      }
+      lastname = d.name;
+      if (d.name.length > 24) return d.name.slice(0, 23) + "...";
+      return d.name;
+    });
+
+    // Update days counter if use_counter is true
+    if (use_counter == true) {
+      days.data(currentData)
         .transition()
         .duration(baseTime * interval_time)
         .ease(d3.easeLinear)
         .tween("text", function (d) {
           var self = this;
-          var i = d3.interpolateDate(
-            new Date(self.textContent),
-            new Date(d.date)
-          );
+          var i = d3.interpolate(self.textContent, counter.value),
+            prec = (counter.value + "").split("."),
+            round = prec.length > 1 ? Math.pow(10, prec[1].length) : 1;
+
           return function (t) {
-            var dateformat = d3.timeFormat(timeFormat);
-            self.textContent = dateformat(i(t));
+            self.textContent = d3.format(format)(Math.round(i(t) * round) / round);
           };
         });
-    } else {
-      dateLabel.text(currentdate);
+    } else if (use_type_info == true) {
+      // Update top type info if use_type_info is true
+      top_type.data(currentData).text(function (d) {
+        return d["type"];
+      });
     }
+  }
 
-    xAxisG
-      .transition()
-      .duration(baseTime * interval_time)
-      .ease(d3.easeLinear)
-      .call(xAxis);
-    yAxisG
-      .transition()
-      .duration(baseTime * interval_time)
-      .ease(d3.easeLinear)
-      .call(yAxis);
+  // Enter new bars
+  var barEnter = bar.enter().insert("g", ".axis")
+    .attr("class", "bar")
+    .attr("transform", function (d) { return "translate(0," + yScale(yValue(d)) + ")"; });
 
-    yAxisG.selectAll(".tick").remove();
-    if (!config.show_x_tick) {
-      xAxisG.selectAll(".tick").remove();
-    }
+  // Append rectangles for bars
+  barEnter.append("rect")
+    .attr("width", function (d) {
+      if (enter_from_0) {
+        return 0;
+      } else {
+        return xScale(currentData[currentData.length - 1].value);
+      }
+    })
+    .attr("fill-opacity", 0)
+    .attr("height", 26)
+    .attr("y", 50)
+    .style("fill", d => getColor(d))
+    .transition("a")
+    .delay(500 * interval_time)
+    .duration(2490 * interval_time)
+    .attr("y", 0)
+    .attr("width", d => xScale(xValue(d)))
+    .attr("fill-opacity", 1);
 
-    yScale
-      .domain(currentData.map(d => d.name).reverse())
-      .range([innerHeight, 0]);
+  // Add rounded corners if specified
+  if (config.rounded_rectangle) {
+    d3.selectAll("rect").attr("rx", 13);
+  }
 
-    var bar = g.selectAll(".bar").data(currentData, function (d) {
-      return d.name;
-    });
-
-    if (showMessage) {
-      topLabel.data(currentData).text(function (d) {
-        if (lastname == d.name) {
-          counter.value = counter.value + step;
-        } else {
-          counter.value = 1;
+  // Append labels for bars if showLabel is true
+  if (config.showLabel == true) {
+    barEnter.append("text")
+      .attr("y", 50)
+      .attr("fill-opacity", 0)
+      .style("fill", d => getColor(d))
+      .transition("2")
+      .delay(500 * interval_time)
+      .duration(2490 * interval_time)
+      .attr("fill-opacity", 1)
+      .attr("y", 0)
+      .attr("class", function (d) { return "label "; })
+      .attr("x", config.labelx)
+      .attr("y", 20)
+      .attr("text-anchor", "end")
+      .text(function (d) {
+        if (long) {
+          return "";
         }
-        lastname = d.name;
-        if (d.name.length > 24) return d.name.slice(0, 23) + "...";
         return d.name;
       });
-      if (use_counter == true) {
-        days
-          .data(currentData)
-          .transition()
-          .duration(baseTime * interval_time)
-          .ease(d3.easeLinear)
-          .tween("text", function (d) {
-            var self = this;
-            var i = d3.interpolate(self.textContent, counter.value),
-              prec = (counter.value + "").split("."),
-              round = prec.length > 1 ? Math.pow(10, prec[1].length) : 1;
-
-            return function (t) {
-              self.textContent = d3.format(format)(
-                Math.round(i(t) * round) / round
-              );
-            };
-          });
-      } else if (use_type_info == true) {
-        top_type.data(currentData).text(function (d) {
-          return d["type"];
-        });
-      }
-    }
-
-    var barEnter = bar
-      .enter()
-      .insert("g", ".axis")
-      .attr("class", "bar")
-      .attr("transform", function (d) {
-        return "translate(0," + yScale(yValue(d)) + ")";
-      });
-
-    barEnter
-      .append("rect")
-      .attr("width", function (d) {
-        if (enter_from_0) {
-          return 0;
-        } else {
-          return xScale(currentData[currentData.length - 1].value);
-        }
-      })
+  }
+// Check if config.use_img is true
+if (config.use_img) {
+    // Append image pattern for each bar using defs and pattern elements
+    barEnter.append("defs").append("pattern")
+      .attr("id", d => d.name) // Set id of the pattern to the data name
+      .attr("width", "100%")
+      .attr("height", "100%")
+      .append("image")
+      .attr("x", "0")
+      .attr("y", "0")
+      .attr("width", "40")
+      .attr("height", "40")
+      .attr("href", d => config.imgs[d.name]); // Set image href based on config data
+  
+    // Append circle for each bar with image fill
+    barEnter.append("circle")
       .attr("fill-opacity", 0)
-      .attr("height", 26)
-      .attr("y", 50)
-      .style("fill", d => getColor(d))
+      .attr("cy", 63) // Position of the circle
+      .attr("fill", d =>
+        // Fill with image pattern url, encoded to handle special characters
+        "url(#" +
+        encodeURIComponent(d.name)
+          .replace("'", "%27")
+          .replace("(", "%28")
+          .replace(")", "%29") +
+        ")"
+      )
+      .attr("stroke-width", "0px")
       .transition("a")
       .delay(500 * interval_time)
       .duration(2490 * interval_time)
-      .attr("y", 0)
-      .attr("width", d => xScale(xValue(d)))
-      .attr("fill-opacity", 1);
-
-    if (config.rounded_rectangle) {
-      d3.selectAll("rect").attr("rx", 13);
-    }
-    if (config.showLabel == true) {
-      barEnter
-        .append("text")
-        .attr("y", 50)
-        .attr("fill-opacity", 0)
-        .style("fill", d => getColor(d))
-        .transition("2")
-        .delay(500 * interval_time)
-        .duration(2490 * interval_time)
-        .attr("fill-opacity", 1)
-        .attr("y", 0)
-        .attr("class", function (d) {
-          return "label ";
-        })
-        .attr("x", config.labelx)
-        .attr("y", 20)
-        .attr("text-anchor", "end")
-        .text(function (d) {
-          if (long) {
-            return "";
-          }
-          return d.name;
-        });
-    }
-
-    if (config.use_img) {
-      barEnter
-        .append("defs")
-        .append("pattern")
-        .attr("id", d => d.name)
-        .attr("width", "100%")
-        .attr("height", "100%")
-        .append("image")
-        .attr("x", "0")
-        .attr("y", "0")
-        .attr("width", "40")
-        .attr("height", "40")
-        .attr("href", d => config.imgs[d.name]);
-
-      barEnter
-        .append("circle")
-        .attr("fill-opacity", 0)
-        .attr("cy", 63)
-        .attr(
-          "fill",
-          d =>
-            "url(#" +
-            encodeURIComponent(d.name)
-              .replace("'", "%27")
-              .replace("(", "%28")
-              .replace(")", "%29") +
-            ")"
-        )
-        .attr("stroke-width", "0px")
-        .transition("a")
-        .delay(500 * interval_time)
-        .duration(2490 * interval_time)
-        .attr("x", -16)
-        .attr("cx", d => xScale(xValue(d)) - 20)
-        .attr("cy", 13)
-        .attr("r", 40 / 2)
-        .attr("fill-opacity", 1);
-    }
-
-    var barInfo = barEnter
-      .append("text")
-      .attr("x", function (d) {
-        if (long) return 10;
+      .attr("x", -16) // Starting x position of the circle
+      .attr("cx", d => xScale(xValue(d)) - 20) // Position the circle relative to the bar
+      .attr("cy", 13) // Adjust y position of the circle
+      .attr("r", 40 / 2) // Set radius of the circle
+      .attr("fill-opacity", 1); // Make the circle visible
+  }
+  
+  // Append text information for each bar
+  var barInfo = barEnter.append("text")
+    .attr("x", function (d) {
+      // Set x position of the text based on conditions
+      if (long) return 10;
+      if (enter_from_0) {
+        return 0;
+      } else {
+        return xScale(currentData[currentData.length - 1].value);
+      }
+    })
+    .attr("stroke", d => getColor(d)) // Set stroke color based on data
+    .attr("class", function () {
+      return "barInfo";
+    })
+    .attr("y", 50) // Initial y position of the text
+    .attr("stroke-width", "0px")
+    .attr("fill-opacity", 0) // Initially hide the text
+    .transition() // Apply transition to the text
+    .delay(500 * interval_time)
+    .duration(2490 * interval_time)
+    .text(function (d) {
+      // Set text content based on conditions
+      if (use_type_info) {
+        return d[divide_by] + "-" + d.name;
+      }
+      return d.name;
+    })
+    .attr("x", d => {
+      // Set x position of the text based on conditions
+      if (long) return 10;
+      return xScale(xValue(d)) - 40;
+    })
+    .attr("fill-opacity", function (d) {
+      // Show or hide the text based on x position
+      if (xScale(xValue(d)) - 40 < display_barInfo) {
+        return 0;
+      }
+      return 1;
+    })
+    .attr("y", 2)
+    .attr("dy", ".5em")
+    .attr("text-anchor", function () {
+      // Set text-anchor based on conditions
+      if (long) return "start";
+      return "end";
+    })
+    .attr("stroke-width", function (d) {
+      // Set stroke-width based on conditions
+      if (xScale(xValue(d)) - 40 < display_barInfo) {
+        return "0px";
+      }
+      return "4px";
+    })
+    .attr("paint-order", "stroke");
+  
+  // If long flag is true, apply a text tween animation to barInfo
+  if (long) {
+    barInfo.tween("text", function (d) {
+      // Interpolate text content to create a smooth transition
+      var self = this;
+      self.textContent = d.value;
+      var i = d3.interpolate(self.textContent, Number(d.value)),
+        prec = (Number(d.value) + "").split("."),
+        round = prec.length > 1 ? Math.pow(10, prec[1].length) : 1;
+      return function (t) {
+        self.textContent =
+          d[divide_by] +
+          "-" +
+          d.name +
+          "  :" +
+          d3.format(format)(Math.round(i(t) * round) / round);
+      };
+    });
+  }
+  // Update text elements for values if not in long mode
+if (!long) {
+    barEnter.append("text")
+      .attr("x", function () {
+        // Set x position based on conditions
+        if (long) {
+          return 10;
+        }
         if (enter_from_0) {
           return 0;
         } else {
           return xScale(currentData[currentData.length - 1].value);
         }
       })
-      .attr("stroke", d => getColor(d))
-      .attr("class", function () {
-        return "barInfo";
+      .attr("y", 50) // Set initial y position
+      .attr("fill-opacity", 0) // Hide text initially
+      .style("fill", d => getColor(d)) // Set fill color based on data
+      .transition() // Apply transition to the text
+      .duration(2990 * interval_time) // Set transition duration
+      .tween("text", function (d) { // Apply tween animation for smooth transition
+        var self = this;
+        self.textContent = d.value * 0.9; // Set initial text content
+        var i = d3.interpolate(self.textContent, Number(d.value)), // Interpolate values for transition
+          prec = (Number(d.value) + "").split("."), // Split value for precision calculation
+          round = prec.length > 1 ? Math.pow(10, prec[1].length) : 1; // Calculate rounding factor
+        return function (t) {
+          // Update text content during transition
+          self.textContent =
+            d3.format(format)(Math.round(i(t) * round) / round) + // Format text with specified precision
+            config.postfix; // Append postfix if provided
+        };
       })
-      .attr("y", 50)
-      .attr("stroke-width", "0px")
-      .attr("fill-opacity", 0)
-      .transition()
-      .delay(500 * interval_time)
-      .duration(2490 * interval_time)
-      .text(function (d) {
-        if (use_type_info) {
-          return d[divide_by] + "-" + d.name;
-        }
-        return d.name;
+      .attr("fill-opacity", 1) // Make text visible
+      .attr("y", 0) // Adjust y position
+      .attr("class", function (d) {
+        return "value"; // Set class for styling
       })
       .attr("x", d => {
-        if (long) return 10;
-        return xScale(xValue(d)) - 40;
+        return xScale(xValue(d)) + 10; // Set x position relative to bar
       })
-      .attr("fill-opacity", function (d) {
-        if (xScale(xValue(d)) - 40 < display_barInfo) {
-          return 0;
-        }
-        return 1;
+      .attr("y", 22); // Adjust y position after transition
+  }
+  
+  // Transition update for existing bars
+  var barUpdate = bar.transition("2")
+    .duration(2990 * interval_time) // Set transition duration
+    .ease(d3.easeLinear); // Set easing function
+  
+  // Update rectangle elements representing bars
+  barUpdate.select("rect")
+    .style("fill", d => getColor(d)) // Set fill color based on data
+    .attr("width", d => xScale(xValue(d))); // Update width based on data value
+  
+  // Update label elements if configured to show
+  if (config.showLabel == true) {
+    barUpdate.select(".label")
+      .attr("class", function (d) {
+        return "label "; // Set class for styling
       })
-      .attr("y", 2)
-      .attr("dy", ".5em")
-      .attr("text-anchor", function () {
-        if (long) return "start";
-        return "end";
+      .style("fill", d => getColor(d)) // Set fill color based on data
+      .attr("width", d => xScale(xValue(d))); // Update width based on data value
+  }
+  
+  // Update value text elements if not in long mode
+  if (!long) {
+    barUpdate.select(".value")
+      .attr("class", function (d) {
+        return "value"; // Set class for styling
       })
-      .attr("stroke-width", function (d) {
-        if (xScale(xValue(d)) - 40 < display_barInfo) {
-          return "0px";
-        }
-        return "4px";
+      .style("fill", d => getColor(d)) // Set fill color based on data
+      .attr("width", d => xScale(xValue(d))); // Update width based on data value
+  }
+  
+  // Update barInfo text elements
+  barUpdate.select(".barInfo").attr("stroke", function (d) {
+    return getColor(d); // Set stroke color based on data
+  });
+  
+  // Update circle elements if images are used
+  if (config.use_img) {
+    barUpdate.select("circle")
+      .attr("stroke", function (d) {
+        return getColor(d); // Set stroke color based on data
       })
-      .attr("paint-order", "stroke");
-    if (long) {
-      barInfo.tween("text", function (d) {
-        var self = this;
-        self.textContent = d.value;
-        var i = d3.interpolate(self.textContent, Number(d.value)),
-          prec = (Number(d.value) + "").split("."),
-          round = prec.length > 1 ? Math.pow(10, prec[1].length) : 1;
-        return function (t) {
-          self.textContent =
-            d[divide_by] +
-            "-" +
-            d.name +
-            "  :" +
-            d3.format(format)(Math.round(i(t) * round) / round);
-        };
-      });
-    }
-    if (!long) {
-      barEnter
-        .append("text")
-        .attr("x", function () {
-          if (long) {
-            return 10;
-          }
-          if (enter_from_0) {
-            return 0;
-          } else {
-            return xScale(currentData[currentData.length - 1].value);
-          }
-        })
-        .attr("y", 50)
-        .attr("fill-opacity", 0)
-        .style("fill", d => getColor(d))
-        .transition()
-        .duration(2990 * interval_time)
-        .tween("text", function (d) {
-          var self = this;
-          self.textContent = d.value * 0.9;
-          var i = d3.interpolate(self.textContent, Number(d.value)),
-            prec = (Number(d.value) + "").split("."),
-            round = prec.length > 1 ? Math.pow(10, prec[1].length) : 1;
-          // d.value = self.textContent
-          return function (t) {
-            self.textContent =
-              d3.format(format)(Math.round(i(t) * round) / round) +
-              config.postfix;
-            // d.value = self.textContent
-          };
-        })
-        .attr("fill-opacity", 1)
-        .attr("y", 0)
-        .attr("class", function (d) {
-          return "value";
-        })
-        .attr("x", d => {
-          return xScale(xValue(d)) + 10;
-        })
-        .attr("y", 22);
-    }
-    var barUpdate = bar
-      .transition("2")
-      .duration(2990 * interval_time)
-      .ease(d3.easeLinear);
-
-    barUpdate
-      .select("rect")
-      .style("fill", d => getColor(d))
-      .attr("width", d => xScale(xValue(d)));
-    if (config.showLabel == true) {
-      barUpdate
-        .select(".label")
-        .attr("class", function (d) {
-          return "label ";
-        })
-        .style("fill", d => getColor(d))
-        .attr("width", d => xScale(xValue(d)));
-    }
-
-    if (!long) {
-      barUpdate
-        .select(".value")
-        .attr("class", function (d) {
-          return "value";
-        })
-        .style("fill", d => getColor(d))
-        .attr("width", d => xScale(xValue(d)));
-    }
-    barUpdate.select(".barInfo").attr("stroke", function (d) {
-      return getColor(d);
+      .attr("cx", d => xScale(xValue(d)) - 20); // Update x position relative to bar
+  }
+  
+  // Update barInfo text elements
+  var barInfo = barUpdate.select(".barInfo")
+    .text(function (d) {
+      // Set text content based on conditions
+      if (use_type_info) {
+        return d[divide_by] + "-" + d.name;
+      }
+      return d.name;
+    })
+    .attr("x", d => {
+      // Set x position based on conditions
+      if (long) return 10;
+      return xScale(xValue(d)) - 40;
+    })
+    .attr("fill-opacity", function (d) {
+      // Show or hide text based on x position
+      if (xScale(xValue(d)) - 40 < display_barInfo) {
+        return 0;
+      }
+      return 1;
+    })
+    .attr("stroke-width", function (d) {
+      // Set stroke width based on conditions
+      if (xScale(xValue(d)) - 40 < display_barInfo) {
+        return "0px";
+      }
+      return "4px";
+    })
+    .attr("paint-order", "stroke"); // Specify paint order for rendering stroke
+// Update the text content of barInfo based on whether the chart is in long mode
+if (long) {
+    barInfo.tween("text", function (d) {
+      var self = this;
+      var str = d[divide_by] + "-" + d.name + "  :"; // Constructing prefix string for text
+  
+      var i = d3.interpolate(
+        self.textContent.slice(str.length, 99), // Extracting current numerical value from text content
+        Number(d.value) // Target value for interpolation
+      ),
+        prec = (Number(d.value) + "").split("."), // Splitting value for precision calculation
+        round = prec.length > 1 ? Math.pow(10, prec[1].length) : 1; // Rounding factor
+      return function (t) {
+        // Update the text content with interpolated value
+        self.textContent =
+          d[divide_by] +
+          "-" +
+          d.name +
+          "  :" +
+          d3.format(format)(Math.round(i(t) * round) / round); // Format interpolated value and append to prefix
+      };
     });
-
-    if (config.use_img) {
-      barUpdate
-        .select("circle")
-        .attr("stroke", function (d) {
-          return getColor(d);
-        })
-        .attr("cx", d => xScale(xValue(d)) - 20);
-    }
-
-    var barInfo = barUpdate
-      .select(".barInfo")
-      .text(function (d) {
-        if (use_type_info) {
-          return d[divide_by] + "-" + d.name;
-        }
-        return d.name;
-      })
-      .attr("x", d => {
-        if (long) return 10;
-        return xScale(xValue(d)) - 40;
-      })
-      .attr("fill-opacity", function (d) {
-        if (xScale(xValue(d)) - 40 < display_barInfo) {
-          return 0;
-        }
-        return 1;
-      })
-      .attr("stroke-width", function (d) {
-        if (xScale(xValue(d)) - 40 < display_barInfo) {
-          return "0px";
-        }
-        return "4px";
-      })
-      .attr("paint-order", "stroke");
-
-    if (long) {
-      barInfo.tween("text", function (d) {
+  } 
+  // Update the value text in barUpdate if not in long mode
+  else {
+    barUpdate.select(".value")
+      .tween("text", function (d) {
         var self = this;
-        var str = d[divide_by] + "-" + d.name + "  :";
-
-        var i = d3.interpolate(
-          self.textContent.slice(str.length, 99),
-          Number(d.value)
-        ),
-          prec = (Number(d.value) + "").split("."),
-          round = prec.length > 1 ? Math.pow(10, prec[1].length) : 1;
-        return function (t) {
-          self.textContent =
-            d[divide_by] +
-            "-" +
-            d.name +
-            "  :" +
-            d3.format(format)(Math.round(i(t) * round) / round);
-        };
-      });
-    }
-    if (!long) {
-      barUpdate
-        .select(".value")
-        .tween("text", function (d) {
-          var self = this;
-
-
-          if (config.postfix == "") {
-            var i = d3.interpolate(self.textContent, Number(d.value));
-          } else {
-            var i = d3.interpolate(
-              self.textContent.slice(0, -config.postfix.length),
-              Number(d.value)
-            );
-          }
-
+  
+        // Define interpolation based on presence of postfix
+        if (config.postfix == "") {
+          var i = d3.interpolate(self.textContent, Number(d.value));
+        } else {
           var i = d3.interpolate(
-            deformat(self.textContent, config.postfix),
+            self.textContent.slice(0, -config.postfix.length), // Remove existing postfix from text content
             Number(d.value)
           );
-
-          var prec = (Number(d.value) + "").split("."),
-            round = prec.length > 1 ? Math.pow(10, prec[1].length) : 1;
-          return function (t) {
-            self.textContent =
-              d3.format(format)(Math.round(i(t) * round) / round) +
-              config.postfix;
-          };
-        })
-        .duration(2990 * interval_time)
-        .attr("x", d => xScale(xValue(d)) + 10);
-    }
+        }
+  
+        var i = d3.interpolate(
+          deformat(self.textContent, config.postfix), // Deformat text content by removing postfix
+          Number(d.value)
+        );
+  
+        var prec = (Number(d.value) + "").split("."), // Split value for precision calculation
+          round = prec.length > 1 ? Math.pow(10, prec[1].length) : 1; // Rounding factor
+        return function (t) {
+          // Update the text content with interpolated value and postfix
+          self.textContent =
+            d3.format(format)(Math.round(i(t) * round) / round) +
+            config.postfix;
+        };
+      })
+      .duration(2990 * interval_time) // Set duration for the transition
+      .attr("x", d => xScale(xValue(d)) + 10); // Update x position
+  }
+  
     avg =
       (Number(currentData[0]["value"]) +
         Number(currentData[currentData.length - 1]["value"])) /
@@ -1080,35 +1088,42 @@ function dataSort() {
       barExit.select("circle").attr("fill-opacity", 0);
     }
   }
-
-  function change() {
-    yScale
-      .domain(currentData.map(d => d.name).reverse())
-      .range([innerHeight, 0]);
+/*
+   Function to update the position of bars based on the current data.
+   It adjusts the y-scale domain based on the current data names and reverses it.
+*/
+function change() {
+    // Update y-scale domain to match the current data
+    yScale.domain(currentData.map(d => d.name).reverse())
+           .range([innerHeight, 0]);
+           
+    // Update the position of bars based on the chosen animation type
     if (animation == "linear") {
+      // Apply a linear transition to move the bars smoothly
       g.selectAll(".bar")
         .data(currentData, function (d) {
           return d.name;
         })
         .transition("1")
-        .ease(d3.easeLinear)
-        .duration(baseTime * update_rate * interval_time)
+        .ease(d3.easeLinear) // Apply linear easing for smooth transition
+        .duration(baseTime * update_rate * interval_time) // Set the transition duration
         .attr("transform", function (d) {
-          return "translate(0," + yScale(yValue(d)) + ")";
+          return "translate(0," + yScale(yValue(d)) + ")"; // Translate bars vertically
         });
     } else {
+      // Apply a default transition for changing the bars' position
       g.selectAll(".bar")
         .data(currentData, function (d) {
           return d.name;
         })
         .transition("1")
-        .duration(baseTime * update_rate * interval_time)
+        .duration(baseTime * update_rate * interval_time) // Set the transition duration
         .attr("transform", function (d) {
-          return "translate(0," + yScale(yValue(d)) + ")";
+          return "translate(0," + yScale(yValue(d)) + ")"; // Translate bars vertically
         });
     }
   }
-
+  
   var i = 0;
   var p = config.wait;
   var update_rate = config.update_rate;
