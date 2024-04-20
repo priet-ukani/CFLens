@@ -52,26 +52,6 @@ function pauseFunction() {
     // Add your pause functionality here
 }
 
-
-// var color_blind = 'normal';
-// // Get the checkbox2 element
-// const checkbox2 = document.getElementById('flexSwitchCheckChecked2');
-
-// checkbox2.addEventListener('change', function() {
-//   // Check if the checkbox2 is checked
-//   if (this.checked) {
-//     // Perform the color blind function
-//     color_blind = "colorBlind"
-//     console.log(color_blind)
-//     // draw(global_store_data);
-//   } else {
-//     // Perform the normal function
-//     color_blind = "normal"
-//     console.log(color_blind)
-//     // draw(global_store_data);
-//   }
-// });
-
 const config = {
     /* 
      contains the basic settings for starting the visualisation
