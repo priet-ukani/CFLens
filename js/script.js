@@ -1601,7 +1601,7 @@ function make_graph(dataType, countryName) {
         // Hide the tooltip
         tooltip.transition().duration(500).style("opacity", 0);
       });
-
+      make_legend(selectedValue);
     // If a country is selected, redraw its bar chart
     if (countryName) {
       removePopup();
@@ -1669,7 +1669,7 @@ document.getElementById("slider").addEventListener("change", function () {
   removePopup();
   // Redraw the map and bar chart with the updated data based on the selected value
   make_graph(selectedValue, currentCountryName);
-
+  make_legend(selectedValue);
   // Some debugging code
   //   if (currentCountryName != null) {
   //       // var temp3_value = selectedValue === "MaxRating" ? "maxRating" : "avgRating";
@@ -1713,3 +1713,66 @@ function removePopup() {
 // Draw the map and bar chart with the initial data
 make_graph(selectedValue, null);
 
+function make_legend(type){
+    d3.select(".legend").selectAll("*").remove();
+  
+    var legendWidth = 400;
+  var legendHeight = 20;
+  var legendMargin = { top: 10, right: 20, bottom: 10, left: 20 };
+  
+  // Append legend SVG to the container
+  var legendSvg = d3.select(".legend")
+    .append("svg")
+    .attr("class", "legend")
+    .attr("width", legendWidth + legendMargin.left + legendMargin.right)
+    .attr("height", legendHeight + legendMargin.top + legendMargin.bottom+30)
+    .append("g")
+    .attr("transform", "translate(" + legendMargin.left + "," + legendMargin.top + ")")
+    .style("font-size", "12px")
+    .style("font-weight", "bold");
+  
+  // Create color gradient for legend
+  var defs = legendSvg.append("defs");
+  var linearGradient = defs.append("linearGradient")
+    .attr("id", "legendGradient")
+    .attr("x1", "0%")
+    .attr("y1", "0%")
+    .attr("x2", "100%")
+    .attr("y2", "0%");
+  
+  linearGradient.append("stop")
+    .attr("offset", "0%")
+    .attr("stop-color", "#e5f5e0");
+  
+  linearGradient.append("stop")
+    .attr("offset", "100%")
+    .attr("stop-color", "#006d2c");
+  
+  // Create legend rectangle
+  legendSvg.append("rect")
+    .attr("width", legendWidth)
+    .attr("height", legendHeight)
+    .style("fill", "url(#legendGradient)");
+  
+  // Add legend scale
+  range=[0,0]
+  if(type=="MaxRating"){
+    range=[0,4000]
+  }else{
+    range=[0,2600]
+  }
+  
+  var legendScale = d3.scaleLinear()
+    .domain(range) // Adjust domain based on your color scale range
+    .range([0, legendWidth]);
+  
+  var legendAxis = d3.axisBottom(legendScale)
+    .tickSize(5)
+    .ticks(5);
+  
+  legendSvg.append("g")
+    .attr("class", "legendAxis")
+    .attr("transform", "translate(0," + legendHeight + ")")
+    .call(legendAxis);
+  }
+  
