@@ -427,6 +427,660 @@ var totals_small = [
         all: 16950
     }
 ];
+var div1 = [
+    {
+        title: "math",
+        value: 596,
+        all: 6135
+    },
+    {
+        title: "dp",
+        value: 581,
+        all: 6135
+    },
+    {
+        title: "greedy",
+        value: 523,
+        all: 6135
+    },
+    {
+        title: "data structures",
+        value: 515,
+        all: 6135
+    },
+    {
+        title: "constructive algorithms",
+        value: 418,
+        all: 6135
+    },
+    {
+        title: "implementation",
+        value: 352,
+        all: 6135
+    },
+    {
+        title: "graphs",
+        value: 308,
+        all: 6135
+    },
+    {
+        title: "brute force",
+        value: 289,
+        all: 6135
+    },
+    {
+        title: "trees",
+        value: 267,
+        all: 6135
+    },
+    {
+        title: "dfs and similar",
+        value: 241,
+        all: 6135
+    },
+    {
+        title: "binary search",
+        value: 222,
+        all: 6135
+    },
+    {
+        title: "combinatorics",
+        value: 205,
+        all: 6135
+    },
+    {
+        title: "sortings",
+        value: 187,
+        all: 6135
+    },
+    {
+        title: "number theory",
+        value: 168,
+        all: 6135
+    },
+    {
+        title: "bitmasks",
+        value: 134,
+        all: 6135
+    },
+    {
+        title: "strings",
+        value: 128,
+        all: 6135
+    },
+    {
+        title: "geometry",
+        value: 120,
+        all: 6135
+    },
+    {
+        title: "two pointers",
+        value: 119,
+        all: 6135
+    },
+    {
+        title: "dsu",
+        value: 100,
+        all: 6135
+    },
+    {
+        title: "divide and conquer",
+        value: 97,
+        all: 6135
+    },
+    {
+        title: "probabilities",
+        value: 90,
+        all: 6135
+    },
+    {
+        title: "shortest paths",
+        value: 75,
+        all: 6135
+    },
+    {
+        title: "games",
+        value: 60,
+        all: 6135
+    },
+    {
+        title: "hashing",
+        value: 55,
+        all: 6135
+    },
+    {
+        title: "interactive",
+        value: 53,
+        all: 6135
+    },
+    {
+        title: "matrices",
+        value: 42,
+        all: 6135
+    },
+    {
+        title: "flows",
+        value: 40,
+        all: 6135
+    },
+    {
+        title: "fft",
+        value: 40,
+        all: 6135
+    },
+    {
+        title: "graph matchings",
+        value: 30,
+        all: 6135
+    },
+    {
+        title: "string suffix structures",
+        value: 28,
+        all: 6135
+    },
+    {
+        title: "ternary search",
+        value: 12,
+        all: 6135
+    },
+    {
+        title: "2-sat",
+        value: 11,
+        all: 6135
+    },
+    {
+        title: "meet-in-the-middle",
+        value: 10,
+        all: 6135
+    },
+    {
+        title: "expression parsing",
+        value: 8,
+        all: 6135
+    },
+    {
+        title: "chinese remainder theorem",
+        value: 7,
+        all: 6135
+    },
+    {
+        title: "schedules",
+        value: 4,
+        all: 6135
+    },
+]
+var div2 = [
+    {
+        title: "implementation",
+        value: 1499,
+        all: 12884
+    },
+    {
+        title: "math",
+        value: 1452,
+        all: 12884
+    },
+    {
+        title: "greedy",
+        value: 1444,
+        all: 12884
+    },
+    {
+        title: "dp",
+        value: 963,
+        all: 12884
+    },
+    {
+        title: "brute force",
+        value: 908,
+        all: 12884
+    },
+    {
+        title: "constructive algorithms",
+        value: 860,
+        all: 12884
+    },
+    {
+        title: "data structures",
+        value: 746,
+        all: 12884
+    },
+    {
+        title: "sortings",
+        value: 525,
+        all: 12884
+    },
+    {
+        title: "binary search",
+        value: 493,
+        all: 12884
+    },
+    {
+        title: "graphs",
+        value: 426,
+        all: 12884
+    },
+    {
+        title: "dfs and similar",
+        value: 402,
+        all: 12884
+    },
+    {
+        title: "number theory",
+        value: 381,
+        all: 12884
+    },
+    {
+        title: "strings",
+        value: 371,
+        all: 12884
+    },
+    {
+        title: "trees",
+        value: 328,
+        all: 12884
+    },
+    {
+        title: "combinatorics",
+        value: 324,
+        all: 12884
+    },
+    {
+        title: "bitmasks",
+        value: 305,
+        all: 12884
+    },
+    {
+        title: "two pointers",
+        value: 261,
+        all: 12884
+    },
+    {
+        title: "dsu",
+        value: 157,
+        all: 12884
+    },
+    {
+        title: "geometry",
+        value: 157,
+        all: 12884
+    },
+    {
+        title: "divide and conquer",
+        value: 119,
+        all: 12884
+    },
+    {
+        title: "shortest paths",
+        value: 110,
+        all: 12884
+    },
+    {
+        title: "games",
+        value: 97,
+        all: 12884
+    },
+    {
+        title: "hashing",
+        value: 88,
+        all: 12884
+    },
+    {
+        title: "probabilities",
+        value: 86,
+        all: 12884
+    },
+    {
+        title: "interactive",
+        value: 86,
+        all: 12884
+    },
+    {
+        title: "flows",
+        value: 55,
+        all: 12884
+    },
+    {
+        title: "matrices",
+        value: 47,
+        all: 12884
+    },
+    {
+        title: "string suffix structures",
+        value: 40,
+        all: 12884
+    },
+    {
+        title: "fft",
+        value: 39,
+        all: 12884
+    },
+    {
+        title: "graph matchings",
+        value: 28,
+        all: 12884
+    },
+    {
+        title: "ternary search",
+        value: 25,
+        all: 12884
+    },
+    {
+        title: "meet-in-the-middle",
+        value: 22,
+        all: 12884
+    },
+    {
+        title: "2-sat",
+        value: 16,
+        all: 12884
+    },
+    {
+        title: "expression parsing",
+        value: 13,
+        all: 12884
+    },
+    {
+        title: "chinese remainder theorem",
+        value: 7,
+        all: 12884
+    },
+    {
+        title: "schedules",
+        value: 4,
+        all: 12884
+    },
+]
+var div3 = [
+    {
+        title: "greedy",
+        value: 302,
+        all: 2135
+    },
+    {
+        title: "math",
+        value: 273,
+        all: 2135
+    },
+    {
+        title: "implementation",
+        value: 223,
+        all: 2135
+    },
+    {
+        title: "brute force",
+        value: 142,
+        all: 2135
+    },
+    {
+        title: "dp",
+        value: 137,
+        all: 2135
+    },
+    {
+        title: "constructive algorithms",
+        value: 128,
+        all: 2135
+    },
+    {
+        title: "sortings",
+        value: 128,
+        all: 2135
+    },
+    {
+        title: "data structures",
+        value: 120,
+        all: 2135
+    },
+    {
+        title: "binary search",
+        value: 90,
+        all: 2135
+    },
+    {
+        title: "dfs and similar",
+        value: 85,
+        all: 2135
+    },
+    {
+        title: "graphs",
+        value: 75,
+        all: 2135
+    },
+    {
+        title: "strings",
+        value: 74,
+        all: 2135
+    },
+    {
+        title: "two pointers",
+        value: 64,
+        all: 2135
+    },
+    {
+        title: "number theory",
+        value: 54,
+        all: 2135
+    },
+    {
+        title: "trees",
+        value: 51,
+        all: 2135
+    },
+    {
+        title: "combinatorics",
+        value: 32,
+        all: 2135
+    },
+    {
+        title: "shortest paths",
+        value: 31,
+        all: 2135
+    },
+    {
+        title: "bitmasks",
+        value: 27,
+        all: 2135
+    },
+    {
+        title: "dsu",
+        value: 27,
+        all: 2135
+    },
+    {
+        title: "hashing",
+        value: 15,
+        all: 2135
+    },
+    {
+        title: "divide and conquer",
+        value: 11,
+        all: 2135
+    },
+    {
+        title: "games",
+        value: 9,
+        all: 2135
+    },
+    {
+        title: "interactive",
+        value: 7,
+        all: 2135
+    },
+    {
+        title: "graph matchings",
+        value: 6,
+        all: 2135
+    },
+    {
+        title: "meet-in-the-middle",
+        value: 6,
+        all: 2135
+    },
+    {
+        title: "flows",
+        value: 4,
+        all: 2135
+    },
+    {
+        title: "probabilities",
+        value: 4,
+        all: 2135
+    },
+    {
+        title: "ternary search",
+        value: 3,
+        all: 2135
+    },
+    {
+        title: "geometry",
+        value: 2,
+        all: 2135
+    },
+    {
+        title: "matrices",
+        value: 2,
+        all: 2135
+    },
+    {
+        title: "2-sat",
+        value: 2,
+        all: 2135
+    },
+    {
+        title: "schedules",
+        value: 1,
+        all: 2135
+    },
+]
+var div4 = [
+    {
+        title: "implementation",
+        value: 78,
+        all: 350
+    },
+    {
+        title: "greedy",
+        value: 44,
+        all: 350
+    },
+    {
+        title: "brute force",
+        value: 27,
+        all: 350
+    },
+    {
+        title: "math",
+        value: 27,
+        all: 350
+    },
+    {
+        title: "sortings",
+        value: 26,
+        all: 350
+    },
+    {
+        title: "data structures",
+        value: 21,
+        all: 350
+    },
+    {
+        title: "dp",
+        value: 18,
+        all: 350
+    },
+    {
+        title: "bitmasks",
+        value: 15,
+        all: 350
+    },
+    {
+        title: "strings",
+        value: 15,
+        all: 350
+    },
+    {
+        title: "binary search",
+        value: 15,
+        all: 350
+    },
+    {
+        title: "dfs and similar",
+        value: 14,
+        all: 350
+    },
+    {
+        title: "graphs",
+        value: 9,
+        all: 350
+    },
+    {
+        title: "two pointers",
+        value: 9,
+        all: 350
+    },
+    {
+        title: "constructive algorithms",
+        value: 6,
+        all: 350
+    },
+    {
+        title: "number theory",
+        value: 5,
+        all: 350
+    },
+    {
+        title: "trees",
+        value: 4,
+        all: 350
+    },
+    {
+        title: "geometry",
+        value: 4,
+        all: 350
+    },
+    {
+        title: "dsu",
+        value: 3,
+        all: 350
+    },
+    {
+        title: "shortest paths",
+        value: 2,
+        all: 350
+    },
+    {
+        title: "divide and conquer",
+        value: 2,
+        all: 350
+    },
+    {
+        title: "combinatorics",
+        value: 2,
+        all: 350
+    },
+    {
+        title: "hashing",
+        value: 1,
+        all: 350
+    },
+    {
+        title: "flows",
+        value: 1,
+        all: 350
+    },
+    {
+        title: "games",
+        value: 1,
+        all: 350
+    },
+    {
+        title: "interactive",
+        value: 1,
+        all: 350
+    },
+]
+
 
 
 var temp=d3.select('#donut')    // select the div element with the id 'donut'
@@ -484,13 +1138,14 @@ function pie2() // function to draw the pie chart
 
     // setting the path
     var path = svg.selectAll('path')
-        .data(pie(totals))
-        .enter()
-        .append('path')
-        .attr('d', arc)
-        .attr('fill', function (d, i) {
-            return color(d.data.title);
-        })
+    .data(pie(totals))
+    .enter()
+    .append('path')
+    .attr('d', arc)
+    .attr('fill', '#5A39AC') // constant color
+    .attr('stroke', '#fff') // border color
+    .attr('stroke-width', 0.5) // border width
+
         .attr('transform', 'translate(0, 0)')
         .on('mouseover', function (event,d, i) {
             // Setting the opacity of the path and transition
@@ -579,24 +1234,42 @@ function pie2() // function to draw the pie chart
 d3.select("button#everyone")
     .on("click", function () {
         console.log("hello");
-        // change(totals);
-        // const existingPopup = document.querySelector(".pie"); // Get the existing popup container
-        // if (existingPopup) {
-        //     document.body.removeChild(existingPopup); // Remove the popup container
-        // }
+
         totals=totals_save;
         pie2();
     })
     d3.select("button#women")
     .on("click", function () {
         console.log("hello2 ");
-        // const existingPopup = document.querySelector(".pie"); // Get the existing popup container
-        // if (existingPopup) {
-        //   document.body.removeChild(existingPopup); // Remove the popup container
-        // }
+
         totals=totals_small;
         pie2();
     })
+    d3.select("button#div1")
+    .on("click", function () {
+        console.log("Div1 ");
+        totals=div1;
+        pie2();
+    })
+    d3.select("button#div2")
+    .on("click", function () {
+        console.log("Div2 ");
+        totals=div2;
+        pie2();
+    })
+    d3.select("button#div3")
+    .on("click", function () {
+        console.log("Div3 ");
+        totals=div3;
+        pie2();
+    })
+    d3.select("button#div4")
+    .on("click", function () {
+        console.log("Div4 ");
+        totals=div4;
+        pie2();
+    })
+    
 // d3.select("button#men")
 //     .on("click", function () {
 //         change(maleData)

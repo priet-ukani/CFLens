@@ -103,9 +103,9 @@ var path = svg.selectAll('path')
 .enter()
 .append('path')
 .attr('d', arc)
-.attr('fill', function (d, i) {
-    return color(d.data.title);
-})
+.attr('fill', '#5A39AC') // constant color
+.attr('stroke', '#fff') // border color
+.attr('stroke-width', 2) // border width
 .attr('transform', 'translate(0, 0)')
 .on('mouseover', function (d, i) {
     d3.select(this).transition()
