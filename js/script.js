@@ -1601,7 +1601,7 @@ function make_graph(dataType, countryName) {
         // Hide the tooltip
         tooltip.transition().duration(500).style("opacity", 0);
       });
-      make_legend(selectedValue);
+      make_legend(selectedValue);   
     // If a country is selected, redraw its bar chart
     if (countryName) {
       removePopup();
