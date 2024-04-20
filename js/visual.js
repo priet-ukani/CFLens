@@ -58,7 +58,7 @@ const config = {
      like position , size , formatting etc. 
     */
     encoding: "UTF-8",
-    max_number: 20,
+    max_number: 10,
     showMessage: true,
     auto_sort: false,
     timeFormat: "%Y-%m-%d",
@@ -165,15 +165,8 @@ let rate = [];
 
 // Get the auto_sort value from the configuration
 var auto_sort = config.auto_sort;
-
-// If auto_sort is true, sort the dates in ascending order
-if (auto_sort) {
-    var time = date.sort((x, y) => new Date(x) - new Date(y));
-} else {
-    // Otherwise, use the unsorted dates
-    var time = date;
-}
-
+var time = date;
+    
 // getting the default values for start from the configuration settings
 var use_semilogarithmic_coordinate = config.use_semilogarithmic_coordinate;
 var big_value = config.big_value;
@@ -1140,3 +1133,23 @@ function change() {
     }
   }, baseTime * interval_time);
 }
+
+// Get the slider input element
+const sliderInput = document.getElementById('sliderInput');
+
+// Add an event listener to the slider input
+sliderInput.addEventListener('input', function() {
+  const sliderValue = this.value;
+    console.log(sliderValue)
+  // Calculate the target index based on the slider value
+
+  const targetIndex = Math.floor(( - 1) * sliderValue / 100);
+
+  // Update the currentdate and call getCurrentData with the target index
+  currentdate = date[targetIndex];
+  getCurrentData(currentdate);
+
+  // Call the redraw and change functions to update the visualization
+  redraw();
+  change();
+});
