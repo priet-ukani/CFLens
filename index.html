@@ -280,9 +280,39 @@
                         </div>
                         <div id="charts" style="text-align: center;"></div>
                     </center>
+                    </div>
+                </div>
+                <div class="row1">
+                            
+                    <h1>
+                        Time Distribution Comparator for Multiple Users
+                    </h1>
+                     <p> 
+                        This chart shows the rating of two users on Codeforces. The user can select two users from the dropdown and see the rating of the two users over time. The chart is interactive and the user can hover over the chart to see the rating of the two users at a particular time. The chart is color coded and the user can see the rating of the two users at a particular time.
+                    </p>
+                        
+                    <p>
+                     
+                    </p>
+                     
+                     <br>
+                     <br>
+                    <center>
+                        <div>
+                            <label for="usernames"
+                              >Enter up to 4 user handles (comma-separated):</label
+                            >
+                            <input type="text" id="usernames" /><br /><br />
+                            <label for="contestId">Enter contest ID:</label>
+                            <input type="text" id="contestId" /><br /><br />
+                            <button onclick="Plot()">Plot Radar Chart</button>
+                          </div>
+                          <div class="radarChart"></div>
+                      
+                          <script src="./js/radarChart.js"></script>
+                    </center>
                     <!-- </div> -->
                 </div>
-
      
                 <div class="row1">
                             
