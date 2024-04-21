@@ -257,7 +257,7 @@
                     <!-- </div> -->
                 </div>
 
-                <div class="row1">
+                <!-- <div class="row1">
                             
                     <h1>
                         Rating Comparator of Two Users
@@ -280,15 +280,14 @@
                         </div>
                         <div id="charts" style="text-align: center;"></div>
                     </center>
-                    </div>
-                </div>
+                </div> -->
                 <div class="row1">
                             
                     <h1>
                         Time Distribution Comparator for Multiple Users
                     </h1>
                      <p> 
-                        This chart shows the rating of two users on Codeforces. The user can select two users from the dropdown and see the rating of the two users over time. The chart is interactive and the user can hover over the chart to see the rating of the two users at a particular time. The chart is color coded and the user can see the rating of the two users at a particular time.
+                        This chart shows enables the users to enter upto 4 Codeforces user handles and the Contest ID, to compare the percentage of time taken to complete each question in that contest. This enables a user to compare times with their friends in a visual way, and identify, which questions they spent more time on. It also enables a problem setter, to compare the time distribution of users at various ratings, to understand the trends in time taken to solve problems.
                     </p>
                         
                     <p>
@@ -297,16 +296,35 @@
                      
                      <br>
                      <br>
+                     <style>
+                        .RadarCont {
+                            text-align: center;
+                        }
+                        .RadarLabel {
+                            display: inline-block;
+                            width: 150px; /* Adjust the width as needed */
+                            text-align: right;
+                        }
+                
+                        .RadarInput {
+                            width: 200px; /* Adjust the width as needed */
+                            margin-bottom: 10px; /* Add some space between inputs */
+                        }
+                
+                        .RadarButton {
+                            margin-left: 10px;
+                        }
+                     </style>
                     <center>
-                        <div>
-                            <label for="usernames"
-                              >Enter up to 4 user handles (comma-separated):</label
+                        <div class="RadarCont">
+                            <label class ="RadarLabel" for="usernames"
+                              >Enter CF Handles:</label
                             >
-                            <input type="text" id="usernames" /><br /><br />
-                            <label for="contestId">Enter contest ID:</label>
-                            <input type="text" id="contestId" /><br /><br />
-                            <button onclick="Plot()">Plot Radar Chart</button>
-                          </div>
+                            <input class ="RadarInput" type="text" id="usernames" /><br /><br />
+                            <label class ="RadarLabel" for="contestId">Enter Contest ID:</label>
+                            <input class ="RadarInput" type="text" id="contestId" /><br /><br />
+                            <button class ="RadarButton" onclick="Plot()">Plot Time Distribution Chart</button>
+                        </div>
                           <div class="radarChart"></div>
                       
                           <script src="./js/radarChart.js"></script>

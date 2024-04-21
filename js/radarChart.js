@@ -1,4 +1,4 @@
-function RadarChart(id, data, options, names) {
+function RadarChart(id, data, options, names,contestDuration) {
     var cfg = {
         w: 600,                                // Width of the circle
         h: 600,                                // Height of the circle
@@ -242,6 +242,28 @@ function RadarChart(id, data, options, names) {
     }//wrap	
 
     var names_list = names.split(",");
+    var legendBox = g.append("rect")
+    .attr("x", cfg.w - 18 -  10 - 60 -18 -5) // Adjust x-coordinate for positioning
+    .attr("y", -10  + 2*(4- names_list.length)) // Adjust y-coordinate for positioning
+    .attr("width", 130) // Adjust width based on your legend size
+    .attr("height", names_list.length * 25) // Adjust height based on your legend size
+    .style("fill", "none") // Transparent fill
+    .style("stroke", "black") // Border color
+    .style("stroke-width", 1); // Border width
+    var durationText = g.append("text")
+    .attr("class", "contestDuration")
+    .attr("x", cfg.w + 18 +  10 )
+    .attr("y", 130)
+    .style("text-anchor", "end")
+    .style("font-weight", "bold")
+    .text("Contest Duration: " + (parseInt(contestDuration) / 60).toString() + " minutes");
+    var durationBox = g.append("rect")
+    .attr("class", "textBoxBackground")
+    .attr("x", cfg.w -200 - 15 -36) // Adjust the x-coordinate to position the rectangle properly
+    .attr("y", 130 -15) // Adjust the y-coordinate to position the rectangle properly
+    .attr("width", 300) // Adjust the width to fit the text box
+    .attr("height", 20) // Adjust the height to fit the text box
+    .style("fill", "rgba(0, 0, 220, 0.3)"); // Blue color with opacity 0.5
     var legend2 = g.selectAll(".legend2")
         .data(names_list)
         .enter().append("g")
@@ -263,13 +285,15 @@ function RadarChart(id, data, options, names) {
         .style("text-anchor", "end")
         .style("fill", "black")
         .text(function (d) { return d; });
+
+
 }//RadarChart
 
 var margin = { top: 100, right: 100, bottom: 100, left: 100 },
     width = Math.min(700, window.innerWidth - 10) - margin.left - margin.right,
     height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 
-var color = d3.scaleOrdinal().range(["#EDC951", "#CC333F", "#00A0B0", "#00DC00"]);
+var color = d3.scaleOrdinal().range(["#EDC951", "#CC333F", "#00A0B0", "#00DC00","#9370DB"]);
 
 var radarChartOptions = {
     w: width,
@@ -289,11 +313,11 @@ async function Plot() {
     if (contestId == "")
         contestId = 1873;
 
-    function drawRadarChart(data, usernames) {
-        RadarChart(".radarChart", data, radarChartOptions, usernames);
+    function drawRadarChart(data, usernames,totalDurationSeconds) {
+        RadarChart(".radarChart", data, radarChartOptions, usernames,totalDurationSeconds);
     }
 
-    var data = await fetchData(usernames, contestId);
+    var [data,totalDurationSeconds] = await fetchData(usernames, contestId);
 
     async function fetchData(handles, contest) {
         const handleList = handles.split(",").map((handle) => handle.trim());
@@ -349,13 +373,13 @@ async function Plot() {
                 data.push(userProblemData);
             });
 
-            return data;
+            return [data,totalDurationSeconds];
         } catch (error) {
             console.error(error);
         }
     }
 
-    drawRadarChart(data, usernames);
+    drawRadarChart(data, usernames,totalDurationSeconds);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
