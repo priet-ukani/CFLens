@@ -1,4 +1,5 @@
-var state = "averageProblemsSolved";
+function avgBarChart(){
+  var state = "averageProblemsSolved";
 
 // Select the dropdown element
 const dropdown = document.getElementById("slider2");
@@ -21,10 +22,22 @@ dropdown.addEventListener("change", function () {
   }
 });
 
+var screenWidth = window.screen.width;
+var screenHeight = window.screen.height;
+var width_index=0.5;
+if(screenWidth<600){
+  width_index=0.9;
+}else if(screenWidth>800 && screenWidth<1000){
+  width_index=0.9;
+}else if(screenWidth>600 && screenWidth<800){
+  width_index=0.7;
+}else if(screenWidth>1000 && screenWidth<1200){
+  width_index=0.7;
+}
   // set the dimensions and margins of the graph
   const margin = { top: 10, right: 30, bottom: 100, left: 100 },
-    width = 650 - margin.left - margin.right,
-    height = 700 - margin.top - margin.bottom;
+    width = width_index*screenWidth - margin.left - margin.right,
+    height = 0.6*screenHeight - margin.top - margin.bottom;
 
   // append the svg object to the body of the page
   const svg = d3
@@ -316,3 +329,6 @@ function drawBarchart() {
 }
 
 drawBarchart();
+}
+
+avgBarChart();

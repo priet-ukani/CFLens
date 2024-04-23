@@ -10,6 +10,66 @@
  * Copyright 2011-2022 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+ .blockHead:after {
+  color: #5a39ac;
+  /*border-left: 20px solid;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;*/
+  border-top: 40px solid transparent;
+  border-right: 40px solid #5a39ac;
+  border-bottom: 40px solid transparent;
+  display: inline-block;
+  content: '';
+  position: absolute;
+  left: -30px;
+}
+
+.blockHead {
+  background-color: #5a39ac;
+  /* width: 150px;*/
+  height: 40px;
+  display: inline-block;
+position: relative;
+text-align: center;
+display: flex;
+justify-content: center;
+/* align horizontal */
+align-items: center;
+/* align vertical */
+margin-top: 180px;
+  margin-left: 20px;
+}
+@media (max-width: 900px) {
+  .blockHead {
+    margin-top: 20px;
+    margin-bottom : 20px;
+      margin-left: 36vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .blockHead {
+    margin-top: 20px;
+    margin-bottom : 20px;
+      margin-left: 27vw;
+  }
+}
+
+.blocktext {
+  color: white;
+  font-weight: bold;
+  padding-left: 10px;
+  padding-right: 20px;
+  font-family: Arial;
+  font-size: 11;
+  line-height: 20px;
+  vertical-align: middle;
+}
+
+
+
+
+
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;

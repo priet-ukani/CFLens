@@ -14,7 +14,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
         <script src="https://d3js.org/d3.v6.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    
+        <link rel="stylesheet" href="./css/stylesheet.css">
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
     </head>
@@ -69,16 +69,17 @@
             background-color: #45a049;
         }
         /* Added styles for legend */
-        .legend {
+        .legendLine {
             display: flex;
             align-items: center;
             margin-bottom: 5px;
         }
-        .legend-text {
+        .legendLine-text {
             font-size: 14px;
             margin-left: 5px;
         }
     </style>
+
     <body id="page-top">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
@@ -175,11 +176,10 @@
                       </div> -->
                      <center>
                         
-                        <svg width="1200" height="800"></svg>
+                        <svg class="RaceChart" width="1200" height="800"></svg>
                         <!-- <svg width="62vw" height="1080"></svg> -->
                         <!-- <svg></svg> -->
                         
-                        <link rel="stylesheet" href="./css/stylesheet.css">
                     </center>
                 </div>
 
@@ -198,10 +198,10 @@
                         Additional buttons are provided to show the distribution of problems in each division. The user can click on the buttons to see the distribution of problems in each division.
                      </p>
                      <br><br>
-                     <div class="mx-sm-auto mx-0 col-lg-6 col-12 text-center px-0">
+                     <div id="big_donut_id" class="mx-sm-auto mx-0 col-lg-6 col-12 text-center px-0">
                         <div id="donuttipDIV">
-                
-                            <div id="donut" class="mx-0 px-0 col-12 mb-1"></div>
+                            <!-- <div class="blockHead" style="width:100px;"><span class="blocktext">Others</span></div> -->
+                            <div id="donut" class="mx-0 px-0 col-12 mb-1" ></div>
                         </div>
                                 
                     </div>
@@ -246,10 +246,7 @@
                             </select>
                         </div>
                         <!-- Create a div where the graph will take place -->
-                        <div id="barchart">
-
-
-                        </div>
+                        <div id="barchart"></div>
 
                         <!-- Create a tooltip div -->
                         <div id="barchart_tooltip" style="position: absolute; pointer-events: none;padding: 10px; "></div>
@@ -257,7 +254,7 @@
                     <!-- </div> -->
                 </div>
 
-                <!-- <div class="row1">
+                <div class="row1">
                             
                     <h1>
                         Rating Comparator of Two Users
@@ -280,7 +277,8 @@
                         </div>
                         <div id="charts" style="text-align: center;"></div>
                     </center>
-                </div> -->
+                </div>
+               
                 <div class="row1">
                             
                     <h1>
@@ -327,9 +325,7 @@
                         </div>
                           <div class="radarChart"></div>
                       
-                          <script src="./js/radarChart.js"></script>
                     </center>
-                    <!-- </div> -->
                 </div>
      
                 <div class="row1">
@@ -356,9 +352,9 @@
                                 <option value="AverageRating">Average Rating</option>
                             </select>
                         </div>
-                        <div class="legend"></div>
+                        <div class="legendMap"></div>
                         <!-- <div class="world_map" width="1000" height="900"> -->
-                        <svg id="my_dataviz" width="1000" height="900"></svg>
+                        <svg id="my_dataviz" width="1000" height="700"></svg>
                         <!-- </div> -->
                         <link rel="stylesheet" href="./css/world.css">
                     </center>
@@ -367,6 +363,11 @@
           
             </div>
         </section>
+
+        <div id="root">
+            
+        </div>
+
         <!-- Contact-->
         <section class="contact-section bg-black">
             <div class="container px-4 px-lg-5">
@@ -428,14 +429,16 @@
         <!-- Footer-->
         <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; CFLens 2024</div></footer>
         <!-- Bootstrap core JS-->
+        <script src="./js/radarChart.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- <script src="./js/script.js"></script> -->
+        <script src="./js/script.js"></script>
         <script src="./js/line-chart.js"></script>
         <script src="./js/averageProblemsSolved.js"></script>
         <script src="./js/visual.js"></script>
-
+        <!-- <script src="./js/radarChart.js"></script> -->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
 
+       
     </body>
 </html>

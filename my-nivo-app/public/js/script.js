@@ -1,4 +1,5 @@
-// totals_save has the data for all the tags
+function MapAndPie() {
+    // totals_save has the data for all the tags
 var totals_save = [
     {
         title: "math",
@@ -11,7 +12,7 @@ var totals_save = [
         all: 28759
     },
     {
-        title: "implementation",
+        title: "implement",
         value: 2606,
         all: 28759
     },
@@ -21,12 +22,12 @@ var totals_save = [
         all: 28759
     },
     {
-        title: "constructive algorithms",
+        title: "constructive",
         value: 1642,
         all: 28759
     },
     {
-        title: "data structures",
+        title: "DS",
         value: 1632,
         all: 28759
     },
@@ -71,7 +72,7 @@ var totals_save = [
         all: 28759
     },
     {
-        title: "combinatorics",
+        title: "pnc",
         value: 631,
         all: 28759
     },
@@ -99,92 +100,8 @@ var totals_save = [
         title: "dsu",
         value: 337,
         all: 28759
-    },
-    {
-        title: "divide and conquer",
-        value: 270,
-        all: 28759
-    },
-    {
-        title: "shortest paths",
-        value: 259,
-        all: 28759
-    },
-    {
-        title: "probabilities",
-        value: 226,
-        all: 28759
-    },
-    {
-        title: "interactive",
-        value: 212,
-        all: 28759
-    },
-    {
-        title: "games",
-        value: 203,
-        all: 28759
-    },
-    {
-        title: "hashing",
-        value: 194,
-        all: 28759
-    },
-    {
-        title: "flows",
-        value: 139,
-        all: 28759
-    },
-    {
-        title: "matrices",
-        value: 115,
-        all: 28759
-    },
-    {
-        title: "fft",
-        value: 89,
-        all: 28759
-    },
-    {
-        title: "graph matchings",
-        value: 88,
-        all: 28759
-    },
-    {
-        title: "string suffix structures",
-        value: 87,
-        all: 28759
-    },
-    {
-        title: "ternary search",
-        value: 52,
-        all: 28759
-    },
-    {
-        title: "meet-in-the-middle",
-        value: 47,
-        all: 28759
-    },
-    {
-        title: "expression parsing",
-        value: 35,
-        all: 28759
-    },
-    {
-        title: "2-sat",
-        value: 30,
-        all: 28759
-    },
-    {
-        title: "chinese remainder theorem",
-        value: 16,
-        all: 28759
-    },
-    {
-        title: "schedules",
-        value: 8,
-        all: 28759
     }
+    
 ];
 // totals has the data for the tags used for plotting pie-chart
 var totals = [
@@ -199,7 +116,7 @@ var totals = [
         all: 28759
     },
     {
-        title: "implementation",
+        title: "implement",
         value: 2606,
         all: 28759
     },
@@ -209,12 +126,12 @@ var totals = [
         all: 28759
     },
     {
-        title: "constructive algorithms",
+        title: "constructive",
         value: 1642,
         all: 28759
     },
     {
-        title: "data structures",
+        title: "DS",
         value: 1632,
         all: 28759
     },
@@ -259,7 +176,7 @@ var totals = [
         all: 28759
     },
     {
-        title: "combinatorics",
+        title: "pnc",
         value: 631,
         all: 28759
     },
@@ -286,91 +203,6 @@ var totals = [
     {
         title: "dsu",
         value: 337,
-        all: 28759
-    },
-    {
-        title: "divide and conquer",
-        value: 270,
-        all: 28759
-    },
-    {
-        title: "shortest paths",
-        value: 259,
-        all: 28759
-    },
-    {
-        title: "probabilities",
-        value: 226,
-        all: 28759
-    },
-    {
-        title: "interactive",
-        value: 212,
-        all: 28759
-    },
-    {
-        title: "games",
-        value: 203,
-        all: 28759
-    },
-    {
-        title: "hashing",
-        value: 194,
-        all: 28759
-    },
-    {
-        title: "flows",
-        value: 139,
-        all: 28759
-    },
-    {
-        title: "matrices",
-        value: 115,
-        all: 28759
-    },
-    {
-        title: "fft",
-        value: 89,
-        all: 28759
-    },
-    {
-        title: "graph matchings",
-        value: 88,
-        all: 28759
-    },
-    {
-        title: "string suffix structures",
-        value: 87,
-        all: 28759
-    },
-    {
-        title: "ternary search",
-        value: 52,
-        all: 28759
-    },
-    {
-        title: "meet-in-the-middle",
-        value: 47,
-        all: 28759
-    },
-    {
-        title: "expression parsing",
-        value: 35,
-        all: 28759
-    },
-    {
-        title: "2-sat",
-        value: 30,
-        all: 28759
-    },
-    {
-        title: "chinese remainder theorem",
-        value: 16,
-        all: 28759
-    },
-    {
-        title: "schedules",
-        value: 8,
         all: 28759
     }
 ];
@@ -387,7 +219,7 @@ var totals_small = [
         all: 16950
     },
     {
-        title: "implementation",
+        title: "implement",
         value: 2606,
         all: 16950
     },
@@ -397,12 +229,12 @@ var totals_small = [
         all: 16950
     },
     {
-        title: "constructive algorithms",
+        title: "constructive",
         value: 1642,
         all: 16950
     },
     {
-        title: "data structures",
+        title: "DS",
         value: 1632,
         all: 16950
     },
@@ -444,17 +276,17 @@ var div1 = [
         all: 6135
     },
     {
-        title: "data structures",
+        title: "DS",
         value: 515,
         all: 6135
     },
     {
-        title: "constructive algorithms",
+        title: "constructive",
         value: 418,
         all: 6135
     },
     {
-        title: "implementation",
+        title: "implement",
         value: 352,
         all: 6135
     },
@@ -484,7 +316,7 @@ var div1 = [
         all: 6135
     },
     {
-        title: "combinatorics",
+        title: "pnc",
         value: 205,
         all: 6135
     },
@@ -522,96 +354,11 @@ var div1 = [
         title: "dsu",
         value: 100,
         all: 6135
-    },
-    {
-        title: "divide and conquer",
-        value: 97,
-        all: 6135
-    },
-    {
-        title: "probabilities",
-        value: 90,
-        all: 6135
-    },
-    {
-        title: "shortest paths",
-        value: 75,
-        all: 6135
-    },
-    {
-        title: "games",
-        value: 60,
-        all: 6135
-    },
-    {
-        title: "hashing",
-        value: 55,
-        all: 6135
-    },
-    {
-        title: "interactive",
-        value: 53,
-        all: 6135
-    },
-    {
-        title: "matrices",
-        value: 42,
-        all: 6135
-    },
-    {
-        title: "flows",
-        value: 40,
-        all: 6135
-    },
-    {
-        title: "fft",
-        value: 40,
-        all: 6135
-    },
-    {
-        title: "graph matchings",
-        value: 30,
-        all: 6135
-    },
-    {
-        title: "string suffix structures",
-        value: 28,
-        all: 6135
-    },
-    {
-        title: "ternary search",
-        value: 12,
-        all: 6135
-    },
-    {
-        title: "2-sat",
-        value: 11,
-        all: 6135
-    },
-    {
-        title: "meet-in-the-middle",
-        value: 10,
-        all: 6135
-    },
-    {
-        title: "expression parsing",
-        value: 8,
-        all: 6135
-    },
-    {
-        title: "chinese remainder theorem",
-        value: 7,
-        all: 6135
-    },
-    {
-        title: "schedules",
-        value: 4,
-        all: 6135
-    },
+    }
 ]
 var div2 = [
     {
-        title: "implementation",
+        title: "implement",
         value: 1499,
         all: 12884
     },
@@ -636,12 +383,12 @@ var div2 = [
         all: 12884
     },
     {
-        title: "constructive algorithms",
+        title: "constructive",
         value: 860,
         all: 12884
     },
     {
-        title: "data structures",
+        title: "DS",
         value: 746,
         all: 12884
     },
@@ -681,7 +428,7 @@ var div2 = [
         all: 12884
     },
     {
-        title: "combinatorics",
+        title: "pnc",
         value: 324,
         all: 12884
     },
@@ -699,97 +446,7 @@ var div2 = [
         title: "dsu",
         value: 157,
         all: 12884
-    },
-    {
-        title: "geometry",
-        value: 157,
-        all: 12884
-    },
-    {
-        title: "divide and conquer",
-        value: 119,
-        all: 12884
-    },
-    {
-        title: "shortest paths",
-        value: 110,
-        all: 12884
-    },
-    {
-        title: "games",
-        value: 97,
-        all: 12884
-    },
-    {
-        title: "hashing",
-        value: 88,
-        all: 12884
-    },
-    {
-        title: "probabilities",
-        value: 86,
-        all: 12884
-    },
-    {
-        title: "interactive",
-        value: 86,
-        all: 12884
-    },
-    {
-        title: "flows",
-        value: 55,
-        all: 12884
-    },
-    {
-        title: "matrices",
-        value: 47,
-        all: 12884
-    },
-    {
-        title: "string suffix structures",
-        value: 40,
-        all: 12884
-    },
-    {
-        title: "fft",
-        value: 39,
-        all: 12884
-    },
-    {
-        title: "graph matchings",
-        value: 28,
-        all: 12884
-    },
-    {
-        title: "ternary search",
-        value: 25,
-        all: 12884
-    },
-    {
-        title: "meet-in-the-middle",
-        value: 22,
-        all: 12884
-    },
-    {
-        title: "2-sat",
-        value: 16,
-        all: 12884
-    },
-    {
-        title: "expression parsing",
-        value: 13,
-        all: 12884
-    },
-    {
-        title: "chinese remainder theorem",
-        value: 7,
-        all: 12884
-    },
-    {
-        title: "schedules",
-        value: 4,
-        all: 12884
-    },
+    }
 ]
 var div3 = [
     {
@@ -803,7 +460,7 @@ var div3 = [
         all: 2135
     },
     {
-        title: "implementation",
+        title: "implement",
         value: 223,
         all: 2135
     },
@@ -818,7 +475,7 @@ var div3 = [
         all: 2135
     },
     {
-        title: "constructive algorithms",
+        title: "algorithms",
         value: 128,
         all: 2135
     },
@@ -828,7 +485,7 @@ var div3 = [
         all: 2135
     },
     {
-        title: "data structures",
+        title: "DS",
         value: 120,
         all: 2135
     },
@@ -868,7 +525,7 @@ var div3 = [
         all: 2135
     },
     {
-        title: "combinatorics",
+        title: "pnc",
         value: 32,
         all: 2135
     },
@@ -886,76 +543,11 @@ var div3 = [
         title: "dsu",
         value: 27,
         all: 2135
-    },
-    {
-        title: "hashing",
-        value: 15,
-        all: 2135
-    },
-    {
-        title: "divide and conquer",
-        value: 11,
-        all: 2135
-    },
-    {
-        title: "games",
-        value: 9,
-        all: 2135
-    },
-    {
-        title: "interactive",
-        value: 7,
-        all: 2135
-    },
-    {
-        title: "graph matchings",
-        value: 6,
-        all: 2135
-    },
-    {
-        title: "meet-in-the-middle",
-        value: 6,
-        all: 2135
-    },
-    {
-        title: "flows",
-        value: 4,
-        all: 2135
-    },
-    {
-        title: "probabilities",
-        value: 4,
-        all: 2135
-    },
-    {
-        title: "ternary search",
-        value: 3,
-        all: 2135
-    },
-    {
-        title: "geometry",
-        value: 2,
-        all: 2135
-    },
-    {
-        title: "matrices",
-        value: 2,
-        all: 2135
-    },
-    {
-        title: "2-sat",
-        value: 2,
-        all: 2135
-    },
-    {
-        title: "schedules",
-        value: 1,
-        all: 2135
-    },
+    }
 ]
 var div4 = [
     {
-        title: "implementation",
+        title: "implement",
         value: 78,
         all: 350
     },
@@ -980,7 +572,7 @@ var div4 = [
         all: 350
     },
     {
-        title: "data structures",
+        title: "DS",
         value: 21,
         all: 350
     },
@@ -1020,7 +612,7 @@ var div4 = [
         all: 350
     },
     {
-        title: "constructive algorithms",
+        title: "Constructive",
         value: 6,
         all: 350
     },
@@ -1043,42 +635,7 @@ var div4 = [
         title: "dsu",
         value: 3,
         all: 350
-    },
-    {
-        title: "shortest paths",
-        value: 2,
-        all: 350
-    },
-    {
-        title: "divide and conquer",
-        value: 2,
-        all: 350
-    },
-    {
-        title: "combinatorics",
-        value: 2,
-        all: 350
-    },
-    {
-        title: "hashing",
-        value: 1,
-        all: 350
-    },
-    {
-        title: "flows",
-        value: 1,
-        all: 350
-    },
-    {
-        title: "games",
-        value: 1,
-        all: 350
-    },
-    {
-        title: "interactive",
-        value: 1,
-        all: 350
-    },
+    }
 ]
 
 
@@ -1087,14 +644,38 @@ var temp=d3.select('#donut')    // select the div element with the id 'donut'
 .append('svg')  // append an svg element
 .attr('class', 'pie'); // add a class to the svg element
 
-function pie2() // function to draw the pie chart
+var pie_chart_width;
+var pie_chart_height;
+if (window.screen.width < 600) // if the screen width is less than 900 then set the width and height of the svg element
 {
-    d3.select("#donut").selectAll("svg").remove(); // remove the existing svg element
+    pie_chart_height=250;
+    pie_chart_width=400;
+}
+else
+{
+    pie_chart_height=400;
+    pie_chart_width=650;
+}
+
+var colors_array = [
+    '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd',
+    '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf',
+    '#aec7e8', '#ffbb78', '#98df8a', '#ff9896', '#c5b0d5',
+    '#c49c94', '#f7b6d2', '#c7c7c7', '#dbdb8d', '#9edae5',
+    '#7b94c9', '#ff9896', '#8c6d31', '#fdae6b', '#1f77b4'
+];
+
+
+function add_pie() {
+    // if the pie_added class is present then remove the svg element
+    if (d3.select('.pie_added')) {
+        d3.select('.pie_added').remove();
+    }
+    // div with class blockHead i present then remove the div element
     
-    // Setting the dimensions of the pie chart
-    var width = 360;
-    var height = 360;
-    var radius = Math.min(width, height) / 2;
+    var width = pie_chart_width;
+    var height = pie_chart_height;
+    var radius = Math.min(3*width/4, 3*height/4) / 2;
     var donutWidth = 75;
     var color = d3.scaleOrdinal()   // setting the color scale
         .range(["#5A39AC", "#DD98D6", "#E7C820", "#08B2B2"]);
@@ -1102,17 +683,32 @@ function pie2() // function to draw the pie chart
         // setting the svg element
     var svg = d3.select('#donut')
         .append('svg')
-        .attr('class', 'pie')
+        .attr('class', 'pie_added')
         .attr('width', width)
         .attr('height', height)
         .append('g')
-        .attr('transform', 'translate(' + (width / 2) +
-            ',' + (height / 2) + ')');
-    
+        .attr('transform', 'translate(' + (width / 2 -40) +
+            ',' + (height/2) + ')');
+    if (window.screen.width < 900)
+    {
+        svg.attr('transform', 'translate(' + (width / 2 + 10) +
+            ',' + (height/2+20) + ')')
+    }
+    if (window.screen.width < 600)
+    {
+        svg.attr('transform', 'translate(' + (width / 2 -40) +
+            ',' + (height/2 + 20) + ')')
+    }
             // setting the arc and pie
+            function midAngle(d){
+                return d.startAngle + (d.endAngle - d.startAngle)/2;
+            }        
     var arc = d3.arc()
         .innerRadius(radius - donutWidth)
         .outerRadius(radius);
+        var outerArc = d3.arc()
+        .innerRadius((radius-donutWidth) * 1.2)
+        .outerRadius(radius * 1.2);
     
         // setting the pie
     var pie = d3.pie()
@@ -1136,13 +732,22 @@ function pie2() // function to draw the pie chart
 
         .style("position", "absolute");
 
+    // getting the grouped data
+    totals.sort(function (a, b) {
+        return b.value - a.value;
+    });
+    var group_data_length = 10;
+    var groupedData = totals.slice(group_data_length, totals.length);   
+
     // setting the path
     var path = svg.selectAll('path')
-    .data(pie(totals))
+    .data(pie(groupedData))
     .enter()
     .append('path')
     .attr('d', arc)
-    .attr('fill', '#5A39AC') // constant color
+    .attr('fill', function(d, i) {
+        return colors_array[(i+group_data_length)%colors_array.length] // Use color scale to get color based on index
+    })
     .attr('stroke', '#fff') // border color
     .attr('stroke-width', 0.5) // border width
 
@@ -1181,73 +786,334 @@ function pie2() // function to draw the pie chart
             donutTip
                 .style("opacity", 0);
         });
+        var labels = svg.selectAll("text")
+        .data(pie(groupedData))
+        .enter()
+        .append("text")
+        .attr("transform", function(d) {
+            var pos = outerArc.centroid(d);
+            pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
+            return "translate(" + pos + ")";
+        })
+        .attr("dy", ".35em")
+        .attr("text-anchor", function(d) {
+            return midAngle(d) < Math.PI ? "start" : "end";
+        })
+        .text(function(d) {
+            return d.data.title + "-" + d.value; // Adjust this based on your data structure
+        });
+        if (window.screen.width < 600)
+        {
+            labels.attr("font-size", "10px");
+        }
+        var lines = svg.selectAll("line")
+    .data(pie(groupedData))
+    .enter()
+    .append("line")
+    .attr("x1", function (d) {
+        return outerArc.centroid(d)[0];
+    })
+    .attr("y1", function (d) {
+        return outerArc.centroid(d)[1];
+    })
+    .attr("x2", function (d) {
+        var pos = outerArc.centroid(d);
+        pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
+        return pos[0];
+    })
+    .attr("y2", function (d) {
+        var pos = outerArc.centroid(d);
+        return pos[1];
+    })
+    .attr("stroke", "black")
+    .attr("stroke-width", 1);
+
+}
+
+
+function pie2() // function to draw the pie chart
+{
+    // console.log(totals);
+    d3.select("#donut").selectAll("svg").remove(); // remove the existing svg element
     
+    // Setting the dimensions of the pie chart
+    var width = pie_chart_width;
+    var height = pie_chart_height;
+    var radius = Math.min(3*width/4, 3*height/4) / 2;
+    var donutWidth = 75;
+    var color = d3.scaleOrdinal()   // setting the color scale
+        .range(["#5A39AC", "#DD98D6", "#E7C820", "#08B2B2"]);
     
-    // var legend = svg.selectAll('.legend')
-    //     .data(color.domain())
-    //     .enter()
-    //     .append('g')
-    //     .attr('class', 'circle-legend')
-    //     .attr('transform', function (d, i) {
-    //         var height = legendRectSize + legendSpacing;
-    //         var offset = height * color.domain().length / 2;
-    //         var horz = -2 * legendRectSize - 13;
-    //         var vert = i * height - offset;
-    //         return 'translate(' + horz + ',' + vert + ')';
-    //     });
+        // setting the svg element
+    var svg = d3.select('#donut')
+        .append('svg')
+        .attr('class', 'pie')
+        .attr('width', width)
+        .attr('height', height)
+        .append('g');
+    if (window.screen.width >= 600 && window.screen.width < 900)
+    {
+        svg
+        .attr('transform', 'translate(' + (width / 2 + 10) +
+            ',' + (height / 2) + ')');
+    }
+    if (window.screen.width < 600)
+    {
+        svg.attr('transform', 'translate(' + (width / 2 -40) +
+            ',' + (height/2 + 20) + ')')
+    }
+    else if (window.screen.width >= 900)
+    {
+        svg
+        .attr('transform', 'translate(' + (width / 2-20) +
+            ',' + (height / 2) + ')');
+    }
     
-    // legend.append('circle')
-    //     .style('fill', color)
-    //     .style('stroke', color)
-    //     .attr('cx', 0)
-    //     .attr('cy', 0)
-    //     .attr('r', '.5rem');
+            // setting the arc and pie   
+            function midAngle(d){
+                return d.startAngle + (d.endAngle - d.startAngle)/2;
+            }        
+    var arc = d3.arc()
+        .innerRadius(radius - donutWidth)
+        .outerRadius(radius);
+        var outerArc = d3.arc()
+        .innerRadius((radius-donutWidth) * 1.2)
+        .outerRadius(radius * 1.2);
+        // setting the pie
+    var pie = d3.pie()
+        .value(function (d) {
+            return d.value;
+        })
+        .sort(null);
     
-    // legend.append('text')
-    //     .attr('x', legendRectSize + legendSpacing)
-    //     .attr('y', legendRectSize - legendSpacing)
-    //     .text(function (d) {
-    //         return d;
-    //     });
+        // setting the legend
+    var legendRectSize = 13;
+    var legendSpacing = 7;
     
-    // function change(data) {
-    //     var pie = d3.pie()
-    //         .value(function (d) {
-    //             return d.value;
-    //         }).sort(null)(data);
+    // setting the tooltip
+    var donutTip = d3.select("#donuttipDIV").append("div")
+        .attr("class", "donut-tip")
+        .style("opacity", 0)
+        // add styling to add border and also text colour 
+        .style("background-color", "white")
+        .style("border", "1px solid black")
+        .style("padding", "5px")
+
+        .style("position", "absolute");
     
-    //     var width = 360;
-    //     var height = 360;
-    //     var radius = Math.min(width, height) / 2;
-    //     var donutWidth = 75;
+    // if length of totals is greater than 10 then grouped rest data into grouped data
+    var group_data_length = 10;
+    var groupedData=false;
+    var total_new = totals;
+    if (totals.length > group_data_length) {
+        totals.sort(function (a, b) {
+            return b.value - a.value;
+        });
+        groupedData = true;
+        var groupedData = totals.slice(group_data_length, totals.length);
+        total_new = totals.slice(0, group_data_length);
+        var groupedTotal = 0;
+        for (var i = 0; i < groupedData.length; i++) {
+            groupedTotal += groupedData[i].value;
+        }
+        total_new.push({
+            title: "Others",
+            value: groupedTotal
+        });
+    }
+  
+    // setting the path
+    var path = svg.selectAll('path')
+    .data(pie(total_new))
+    .enter()
+    .append('path')
+    .attr('d', arc)
+    .attr('fill', function(d, i) {
+        return colors_array[i%colors_array.length] // Use color scale to get color based on index
+    })
+    .attr('stroke', '#fff') // border color
+    .attr('stroke-width', 0.5) // border width
+        .attr('transform', 'translate(0, 0)')
+        .on('mouseover', function (event,d, i) {
+            // Setting the opacity of the path and transition
+            d3.select(this)
+                .attr('opacity', '.85');
+            donutTip
+                .style("opacity", 1);
+                let tagname= d.data.title;
+                let num = ((d.value / d.data.all) * 100).toFixed(2) + '%';
+                donutTip.html(tagname+"-"+d.value)
+                .style("left", parseInt(event.pageX + 10) + "px")
+                .style("top", parseInt(event.pageY - 15) + "px");
     
-    //     path = d3.select("#donut")
-    //         .selectAll("path")
-    //         .data(pie); // Compute the new angles
-    //     var arc = d3.arc()
-    //         .innerRadius(radius - donutWidth)
-    //         .outerRadius(radius);
-    //     path.transition().duration(500).attr("d", arc); // redrawing the path with a smooth transition
-    // }
+        })
+        .on('mousemove', function (event,d, i) {
+            // Setting the opacity of the path and transition
+            d3.select(this)
+                .attr('opacity', '.85');
+            donutTip
+                .style("opacity", 1);
+                let tagname= d.data.title;
+                let num = ((d.value / d.data.all) * 100).toFixed(2) + '%';
+                donutTip.html(tagname+"-"+d.value)
+                .style("left", parseInt(event.pageX + 10) + "px")
+                .style("top", parseInt(event.pageY - 15) + "px");
     
+        })
+        .on('mouseout', function (d, i) {
+            // Setting the opacity of the path and transition
+            d3.select(this)
+                .attr('opacity', '1');
+
+            donutTip
+                .style("opacity", 0);
+        });
+
+    // if grouped data is seleceted by user then plot another pie chart to right of the first pie chart with the grouped data 
+    var othersPath = svg.selectAll('path')
+    .filter(function(d) {
+        return d.data.title === "Others";
+    });
+
+    var othersIndex = total_new.findIndex(function(d) {
+        return d.title === "Others";
+    });
+    // Calculate the start and end angles for the "Others" section
+    var othersStartAngle = 0;
+    var othersEndAngle = 0;
+    if (othersIndex !== -1) {
+        // Calculate start angle
+        for (var i = 0; i < othersIndex; i++) {
+            othersStartAngle += pie(total_new)[i].endAngle - pie(total_new)[i].startAngle;
+        }
+        // Calculate end angle
+        othersEndAngle = othersStartAngle + pie(total_new)[othersIndex].endAngle - pie(total_new)[othersIndex].startAngle;
+    }
+
+    var labels = svg.selectAll("text")
+        .data(pie(total_new))
+        .enter()
+        .append("text")
+        .attr("transform", function(d) {
+            var pos = outerArc.centroid(d);
+            pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
+            return "translate(" + pos + ")";
+        })
+        .attr("dy", ".35em")
+        .attr("text-anchor", function(d) {
+            return midAngle(d) < Math.PI ? "start" : "end";
+        })
+        .text(function(d) {
+            return d.data.title + "-" + d.value; // Adjust this based on your data structure
+        });
+        if (window.screen.width < 600)
+        {
+            labels.attr("font-size", "10px");
+        }
+        var lines = svg.selectAll("line")
+    .data(pie(total_new))
+    .enter()
+    .append("line")
+    .attr("x1", function (d) {
+        return outerArc.centroid(d)[0];
+    })
+    .attr("y1", function (d) {
+        return outerArc.centroid(d)[1];
+    })
+    .attr("x2", function (d) {
+        var pos = outerArc.centroid(d);
+        pos[0] = radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1);
+        return pos[0];
+    })
+    .attr("y2", function (d) {
+        var pos = outerArc.centroid(d);
+        return pos[1];
+    })
+    .attr("stroke", "black")
+    .attr("stroke-width", 1);
+    if (groupedData) {
+othersPath.on('click', function() {
+    if (d3.select('.blockHead')) {
+        d3.select('.blockHead').remove();
+    }
+    // add style property to div with id donut
+    var donutDiv = d3.select('#donut');
+    var blockHead;
+    if (window.screen.width>900)
+    {
+        donutDiv.style('display', 'flex')
+        .style('flex-direction', 'row-reverse')
+        .style('width',2*pie_chart_width+100+'px')
+            .style('justify-content', 'space-between');
+        blockHead = donutDiv.append("div")
+        .attr("class", "blockHead")
+        .style("width", "100px");
+        blockHead.append("span")
+        .attr("class", "blocktext")
+        .text("Others");
+        var big_donut=d3.select('#big_donut_id');
+        big_donut.style('width', 2*pie_chart_width+100+'px')
+
+    }
+    else if (window.screen.width < 900)
+    {
+        donutDiv
+        // .style('width',2*pie_chart_width+100+'px')
+            .style('justify-content', 'space-between');
+        blockHead = donutDiv.append("div")
+        .attr("class", "blockHead")
+        .style("width", "100px")
+        .style("transform", "rotate(-90deg)"); // Rotate the block head
+        blockHead.append("span")
+            .attr("class", "blocktext")
+            .text("Others");    
+    }
+
+
+    add_pie();
+})
+    }
+
+        
 };
+
+
+function change_donut_property(){
+    if (d3.select('.pie_added')) {
+        d3.select('.pie_added').remove();
+    }
+    var donutDiv = d3.select('#donut');
+donutDiv.style('display', null)
+.style('width', pie_chart_width+'px')
+    .style('justify-content', null);
+    if (d3.select('.blockHead')) {
+        d3.select('.blockHead').remove();
+    }
+
+var big_donut=d3.select('#big_donut_id');
+big_donut.style('width', pie_chart_width+'px')
+}
+
 d3.select("button#everyone")
     .on("click", function () {
         console.log("hello");
-
         totals=totals_save;
+        change_donut_property();
         pie2();
     })
     d3.select("button#women")
     .on("click", function () {
         console.log("hello2 ");
-
+        change_donut_property();
         totals=totals_small;
+        // if donut has added properties then remove them
+       
         pie2();
     })
     d3.select("button#div1")
     .on("click", function () {
         console.log("Div1 ");
+        change_donut_property();
         totals=div1;
         pie2();
     })
@@ -1255,18 +1121,21 @@ d3.select("button#everyone")
     .on("click", function () {
         console.log("Div2 ");
         totals=div2;
+        change_donut_property();
         pie2();
     })
     d3.select("button#div3")
     .on("click", function () {
         console.log("Div3 ");
         totals=div3;
+        change_donut_property();
         pie2();
     })
     d3.select("button#div4")
     .on("click", function () {
         console.log("Div4 ");
         totals=div4;
+        change_donut_property();
         pie2();
     })
     
@@ -1278,9 +1147,52 @@ pie2();
 
 
 // Getting the svg element and setting the width and height
-const svg = d3.select("#my_dataviz"),
-  width = +svg.attr("width"),
-  height = +svg.attr("height");
+// var screenWidth = window.innerWidth;
+    // var svg = document.getElementById('my_dataviz');
+    var svgWidth, svgHeight;
+// if (screenWidth <= 600) {
+//     svgWidth = 500;
+//     svgHeight = 300;
+// } else if (screenWidth > 600 && screenWidth <= 900) {
+//     svgWidth = 700;
+//     svgHeight = 500;
+// } else {
+//     svgWidth = 1000;
+//     svgHeight = 700;
+// }
+
+const svg = d3.select("#my_dataviz");
+// var screenWidth = window.innerWidth;
+var screenWidth = window.screen.width;
+console.log("SCREEN",screenWidth);
+    // var svg = document.getElementById('my_dataviz');
+    var svgWidth, svgHeight;
+    var scaleSize=100;
+if (screenWidth <= 400) {
+    svgWidth = 250;
+    svgHeight = 300;
+    scaleSize=35;
+}
+else if (screenWidth > 400 && screenWidth <= 600) {
+    svgWidth = 400;
+    svgHeight = 300;
+    scaleSize=50
+} else if (screenWidth > 600 && screenWidth <= 900) {
+    svgWidth = 600;
+    svgHeight = 500;
+    scaleSize=70;
+} else {
+    svgWidth = 900;
+    svgHeight = 700;
+    // console.log(screenWidth)
+    console.log("SCREEN",screenWidth);
+}
+svg.attr('width', svgWidth);
+    svg.attr('height', svgHeight);
+const 
+  width = svgWidth,
+  height = svgHeight;
+// console.log("WIDTH",svg.attr("width"));    
 
 // Initializing Variables
 document.getElementById("slider").value = "MaxRating";
@@ -1290,7 +1202,8 @@ var selectedValue = "MaxRating"; // Variable to store the selected value from th
 // declaring the projection
 const path = d3.geoPath(); // Path generator
 const projection = d3
-  .geoMercator() // Mercator projection
+  .geoMercator() 
+  .scale(scaleSize) // Mercator projection
   .translate([width / 2, height / 2]); // Center the map in the middle of the SVG element
 
 const data = new Map(); // Map to store the data
@@ -1358,30 +1271,58 @@ function generatePopupContent(countryName, dataType) {
     }
     // Plot bar chart based on the selected data type
     const margin = { top: 20, right: 20, bottom: 30, left: 40 }; // Margin for the bar chart
-    const width = 400 - margin.left - margin.right; // Width of the bar chart
-    const height = 300 - margin.top - margin.bottom; // Height of the bar chart
+    var width = 400 - margin.left - margin.right; // Width of the bar chart
+    var temp_width=500;
+    var height = 300 - margin.top - margin.bottom; // Height of the bar chart
+    var translate_width=180;
+    var temp_height=500;
+    var translate_top=100;
+    var font_size="18px";
+    var x_range=200;
+    // var bar_height=
+    if (screenWidth < 900)
+    {
+        width = 200 - margin.left - margin.right;
+        temp_width=300;
+        translate_width=50;
+        translate_top=10;
+        temp_height=300;
+        font_size="12px"
+    }
+    if (screenWidth < 500)
+    {
+        width = 150 - margin.left - margin.right;
+        height = 150 - margin.left - margin.right;
+        temp_width=200;
+        translate_width=20;
+        translate_top=10;
+        temp_height=200;
+        font_size="8px"
+        x_range=50;
+    }
     const svg = d3
       .select("#barChart") // Select the bar chart div
       .append("svg") // Append an SVG element
-      .attr("width", width + margin.left + margin.right + 500) // Set the width
-      .attr("height", height + margin.top + margin.bottom + 500) // Set the height and append a group element to the SVG
+      .attr("width", width + margin.left + margin.right + temp_width) // Set the width
+      .attr("height", height + margin.top + margin.bottom + temp_height) // Set the height and append a group element to the SVG
       .append("g")
       .attr(
         "transform",
-        "translate(" + (margin.left + 180) + "," + (margin.top + 100) + ")"
+        "translate(" + (margin.left + translate_width) + "," + (margin.top + translate_top) + ")"
       ); // Translate the group element
 
     // Declaring x axis domain and range
     const x = d3
       .scaleBand()
       .domain(topOrganizations.map((d) => d.Organisation))
-      .range([0, width + 200])
+      .range([0, width + x_range])
       .padding(0.1);
 
     // Declaring y axis domain and range
     const y = d3
       .scaleLinear()
-      .domain([0, d3.max(topOrganizations, (d) => +d[dataType])])
+    //   .domain([0, d3.max(topOrganizations, (d) => +d[dataType])])
+    .domain([0,4000])
       .range([height, 0]);
 
     // Declaring the tooltip
@@ -1462,14 +1403,14 @@ function generatePopupContent(countryName, dataType) {
       .attr("y", 0)
       .attr("dy", ".35em")
       .style("text-anchor", "end")
-      .style("font-size", "18px");
+      .style("font-size", font_size);
     //   .style("font-wight", "bold")
 
     // Append y axis to the svg element
     svg
       .append("g")
       .call(d3.axisLeft(y))
-      .style("font-size", "18px")
+      .style("font-size", font_size)
       .style("font-wight", "bold");
     //   .style("font-wight", "bold")
   });
@@ -1667,6 +1608,7 @@ document.getElementById("slider").addEventListener("change", function () {
   .range(["#e5f5e0", "#006d2c"]);
   // Remove the existing popup if it exists
   removePopup();
+//   d3.select(".legendMap").selectAll("*").remove();
   // Redraw the map and bar chart with the updated data based on the selected value
   make_graph(selectedValue, currentCountryName);
   make_legend(selectedValue);
@@ -1714,16 +1656,20 @@ function removePopup() {
 make_graph(selectedValue, null);
 
 function make_legend(type){
-    d3.select(".legend").selectAll("*").remove();
-  
+    d3.select(".legendMap").selectAll("*").remove();
+    // var screenWidth = window.innerWidth;
     var legendWidth = 400;
+    if (screenWidth<500)
+    {
+        legendWidth=200;
+    }
   var legendHeight = 20;
   var legendMargin = { top: 10, right: 20, bottom: 10, left: 20 };
   
   // Append legend SVG to the container
-  var legendSvg = d3.select(".legend")
+  var legendSvg = d3.select(".legendMap")
     .append("svg")
-    .attr("class", "legend")
+    .attr("class", "legendMap")
     .attr("width", legendWidth + legendMargin.left + legendMargin.right)
     .attr("height", legendHeight + legendMargin.top + legendMargin.bottom+30)
     .append("g")
@@ -1759,12 +1705,16 @@ function make_legend(type){
   if(type=="MaxRating"){
     range=[0,4000]
   }else{
-    range=[0,2600]
+    range=[0,2500]
   }
-  
-  var legendScale = d3.scaleLinear()
-    .domain(range) // Adjust domain based on your color scale range
-    .range([0, legendWidth]);
+
+    var domainMax = type === "MaxRating" ? 4000 : 4000;
+    var domainStep = domainMax / 4;
+    var domainValues = [0, domainStep, domainStep * 2, domainStep * 3, domainStep * 4];
+
+    var legendScale = d3.scaleLinear()
+        .domain(domainValues)
+        .range([0, legendWidth/4]);
   
   var legendAxis = d3.axisBottom(legendScale)
     .tickSize(5)
@@ -1775,4 +1725,6 @@ function make_legend(type){
     .attr("transform", "translate(0," + legendHeight + ")")
     .call(legendAxis);
   }
-  
+}
+window.addEventListener('resize', MapAndPie);
+MapAndPie();

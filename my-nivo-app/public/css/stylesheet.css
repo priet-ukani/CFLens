@@ -57,9 +57,9 @@ body {
 }
 
 
-.domain {
+/* .domain {
     display: none;
-}
+} */
 
 .tick line {
     stroke: #C0C0BB;
@@ -86,6 +86,23 @@ body {
     font-weight: bold;
     font-family: "Fira Code", "Times New Roman"
 }
+@media screen and (min-width: 600px) and (max-width: 900px) {
+    .dateLabel {
+      font-size: 20pt;
+    }
+  }
+
+  @media screen  and (max-width: 600px) {
+    .dateLabel {
+      font-size: 15pt;
+    }
+    .topLabel {
+        font-size: 10pt;
+    }
+    .top{
+        font-size: 20pt;
+    }
+  }
 
 .dateLabelRed {
 
