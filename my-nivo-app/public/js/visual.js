@@ -163,16 +163,29 @@ The code follows a common pattern for creating D3.js visualizations. It sets up 
   //   };
 
   // loading data from csv file which contains scraped data.
+  var const_data_store;
+  var unique_dates = [];
+  // loading data from csv file which contains scraped data.
   d3.csv("Data/TopCoder.csv")
     .then(function (data) {
       // Call the draw function with the loaded data
       global_store_data = data;
+      const_data_store = data;
+    //   finding the unique dates from the data
+        
+        data.forEach((element) => {
+            if (unique_dates.indexOf(element["date"]) == -1) {
+                unique_dates.push(element["date"]);
+            }
+        });
+        console.log(unique_dates);
       draw(data);
     })
     .catch(function (error) {
       // Handle error if data loading fails
       console.error("Error loading the data:", error);
     });
+
 
   // the main draw function which reloads the graph and updates the values as time changes
   /**
@@ -1223,50 +1236,57 @@ The code follows a common pattern for creating D3.js visualizations. It sets up 
       }
     }, baseTime * interval_time);
   }
-
-  // Get the slider input element
-  const sliderInput = document.getElementById("sliderInput");
-
-  // Add an event listener to the slider input
-  sliderInput.addEventListener("input", function () {
-    state="pause"
-    var svg = d3.select(".RaceChart");
-    svg.html("");
-    state="play"
-    d3.csv("Data/TopCoder.csv")
-    .then(function (data) {
-      global_store_data = [];
-      var new_data=[];
-      // currentdate="2016/05/07";
-      data.forEach((element) => {
-        if (element["date"] === selecetedDate) {
-          console.log("HI");
-          new_data.push(element);
-        }
-      });
-      // Call the draw function with the loaded data
-      global_store_data = new_data;
-      console.log(global_store_data);
-      draw(global_store_data);
-      global_flag=1;
-    })
-    .catch(function (error) {
-      // Handle error if data loading fails
-      console.error("Error loading the data:", error);
-    });
-    // draw(data);
-    // const sliderValue = this.value;
-    // console.log(sliderValue);
-    // // Calculate the target index based on the slider value
-
-    // const targetIndex = Math.floor((-1 * sliderValue) / 100);
-
-    // // Update the currentdate and call getCurrentData with the target index
-    // currentdate = date[targetIndex];
-    // getCurrentData(currentdate);
-
-    // // Call the redraw and change functions to update the visualization
-    // redraw();
-    // change();
-  });
+   // Get the slider input element
+   const sliderInput = document.getElementById("sliderInput");
+  
+   // Add an event listener to the slider input
+   sliderInput.addEventListener("input", function () {
+     var sliderValue = sliderInput.value;
+     console.log(sliderValue);
+     // Calculate the target index based on the slider value
+     const targetIndex = Math.floor((sliderValue) / 100* unique_dates.length);
+     const date=unique_dates[targetIndex];
+     selecetedDate=date;
+     console.log(date);
+ 
+     state="pause"
+     var svg = d3.select(".RaceChart");
+     svg.html("");
+     state="play"
+     d3.csv("Data/TopCoder.csv")
+     .then(function (data) {
+       global_store_data = [];
+       var new_data=[];
+       // currentdate="2016/05/07";
+       data.forEach((element) => {
+         if (element["date"] === selecetedDate) {
+           console.log("HI");
+           new_data.push(element);
+         }
+       });
+       // Call the draw function with the loaded data
+       global_store_data = new_data;
+       console.log(global_store_data);
+       draw(global_store_data);
+       global_flag=1;
+     })
+     .catch(function (error) {
+       // Handle error if data loading fails
+       console.error("Error loading the data:", error);
+     });
+     // draw(data);
+     // const sliderValue = this.value;
+     // console.log(sliderValue);
+     // // Calculate the target index based on the slider value
+ 
+     // const targetIndex = Math.floor((-1 * sliderValue) / 100);
+ 
+     // // Update the currentdate and call getCurrentData with the target index
+     // currentdate = date[targetIndex];
+     // getCurrentData(currentdate);
+ 
+     // // Call the redraw and change functions to update the visualization
+     // redraw();
+     // change();
+   });
 });

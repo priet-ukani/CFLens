@@ -4,6 +4,11 @@ import BumpChart from './components/bumpchart'; // Importing the BumpChart compo
 import TimeRangeChart from './components/TimeRangeChart'; 
 import Funnel from './components/Funnel'; 
 import MyResponsiveRadialBar from './components/MyResponsiveRadialBar';
+
+var screenWidth = window.screen.width;
+var screenHeight = window.screen.height;
+
+
 function App() {
   return (
     <div>
@@ -27,6 +32,8 @@ function App() {
         <p>
             The chart below shows the submission history of a user(prietukani) over a year. 
             The color intensity of a cell represents the number of submissions made on that day.
+            <br />
+            Hover on a day to know more about the submissions made on that day.
         </p>
         <div className="chart-container">
             <TimeRangeChart /> 
@@ -37,7 +44,9 @@ function App() {
             <br />
         <h1>Contest Submission Analysis</h1>
         <p>
-            This chart shows the relative difficulty of different problems in a contest progressively. Number of Participants to number of people who submitted the solution for each problem is shown in the chart.
+            This chart shows the relative difficulty of different problems in a contest progressively. 
+            <br />
+            Number of Participants to number of people who submitted the solution for each problem is shown in the chart.
         </p>
         <div className="chart-container">
             <Funnel /> 
@@ -58,7 +67,14 @@ function App() {
             <MyResponsiveRadialBar /> 
         </div>
       </div>
-     
+      <div className="row1">
+            <br />
+            <br /><br /><br />
+        <h1>Demonstation Video</h1>
+        <br /><br />
+        <iframe width={screenWidth*0.6} height={screenWidth*0.36} src="https://www.youtube.com/embed/XUV7kDNnT7Q" title="CF Lens | Complete Codeforces Visualiser | Data Visualisation Project |" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <br /><br /><br /><br /><br /><br />
+        </div>
         </center>
     </div>
   );
