@@ -10,7 +10,7 @@
 
 <h2>Project Screenshots:</h2>
 
-<img src="images/Homepage.png" alt="project-screenshot" width="490" height="250/">
+<img src="images/Homepage.png" alt="project-screenshot" width="800" height="450/">
 
   
 <h2>🧐 Features</h2>
