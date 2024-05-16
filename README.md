@@ -8,9 +8,9 @@
 
 [Demo Video](https://youtu.be/XUV7kDNnT7Q)
 
-<h2>Project Screenshots:</h2>
+<!-- <h2>Project Screenshots:</h2>
 
-<img src="images/Homepage.png" alt="project-screenshot" width="800" height="450/">
+<img src="images/Homepage.png" alt="project-screenshot" width="800" height="450/"> -->
 
   
 <h2>🧐 Features</h2>
